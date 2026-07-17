@@ -1,7 +1,7 @@
- Day 2 Progress
+## Day 3 Progress
 
-- Learned methods
-- Learned arithmetic operators
-- Learned if-else
-- Calculated late fee
-- Improved code structure
+- Learned Classes
+- Learned Objects
+- Learned Constructors
+- Created Book model
+- Displayed Book information
