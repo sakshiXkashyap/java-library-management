@@ -1,7 +1,7 @@
-## Day 3 Progress
+## Day 5 Progress
 
-- Learned Classes
-- Learned Objects
-- Learned Constructors
-- Created Book model
-- Displayed Book information
+- Learned ArrayList
+- Created Library service
+- Added multiple books
+- Displayed all books using for-each loop
+- Improved project structure

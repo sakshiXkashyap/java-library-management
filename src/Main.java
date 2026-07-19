@@ -1,22 +1,34 @@
 import model.Book;
-import model.Student;
+import service.Library;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Book book = new Book(101, "Java Programming", "James Gosling");
+        System.out.println("===== LIBRARY MANAGEMENT SYSTEM =====");
 
-        Student student = new Student(
-                1,
-                "Sakshi Kashyap",
-                "MCA"
-        );
+        Library library = new Library();
 
-        System.out.println("===== Library Management System =====");
+        library.addBook(new Book(
+                101,
+                "Java Programming",
+                "James Gosling"
+        ));
 
-        book.displayBook();
+        library.addBook(new Book(
+                102,
+                "Clean Code",
+                "Robert C. Martin"
+        ));
 
-        student.displayStudent();
+        library.addBook(new Book(
+                103,
+                "Effective Java",
+                "Joshua Bloch"
+        ));
+
+        library.displayAllBooks();
+
     }
+
 }
