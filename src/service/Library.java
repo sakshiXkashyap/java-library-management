@@ -11,23 +11,32 @@ public class Library {
         books = new ArrayList<>();
     }
 
+    // Add Book
     public void addBook(Book book) {
         books.add(book);
     }
 
+    // Display All Books
     public void displayAllBooks() {
-
-        if (books.isEmpty()) {
-            System.out.println("No books available.");
-            return;
-        }
-
-        System.out.println("\n===== Library Books =====");
 
         for (Book book : books) {
             book.displayBook();
         }
 
+    }
+
+    // Search Book
+    public Book searchBookById(int bookId) {
+
+        for (Book book : books) {
+
+            if (book.getBookId() == bookId) {
+                return book;
+            }
+
+        }
+
+        return null;
     }
 
 }
