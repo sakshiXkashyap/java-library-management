@@ -15,6 +15,14 @@ public class Main {
 
         library.displayAllBooks();
 
+        System.out.println("\nIssuing Book 102...\n");
+
+        library.issueBook(102);
+
+        System.out.println();
+
+        library.displayAllBooks();
+
         System.out.println("\nSearching for Book ID 102...\n");
 
         Book foundBook = library.searchBookById(102);

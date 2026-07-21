@@ -5,13 +5,13 @@ public class Book {
     private int bookId;
     private String title;
     private String author;
-    private boolean available;
+    private boolean issued;
 
     public Book(int bookId, String title, String author) {
         this.bookId = bookId;
         this.title = title;
         this.author = author;
-        this.available = true;
+        this.issued = false;
     }
 
     public int getBookId() {
@@ -26,16 +26,21 @@ public class Book {
         return author;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public boolean isIssued() {
+        return issued;
+    }
+
+    public void setIssued(boolean issued) {
+        this.issued = issued;
     }
 
     public void displayBook() {
 
-        System.out.println("---------------------------");
+        System.out.println("----------------------------");
         System.out.println("Book ID : " + bookId);
         System.out.println("Title   : " + title);
         System.out.println("Author  : " + author);
-        System.out.println("Status  : " + (available ? "Available" : "Issued"));
+        System.out.println("Issued  : " + issued);
+
     }
 }

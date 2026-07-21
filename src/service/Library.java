@@ -7,6 +7,7 @@ public class Library {
 
     private ArrayList<Book> books;
 
+    // Constructor
     public Library() {
         books = new ArrayList<>();
     }
@@ -19,13 +20,14 @@ public class Library {
     // Display All Books
     public void displayAllBooks() {
 
+        System.out.println("\n===== Library Books =====");
+
         for (Book book : books) {
             book.displayBook();
         }
-
     }
 
-    // Search Book
+    // Search Book By ID
     public Book searchBookById(int bookId) {
 
         for (Book book : books) {
@@ -33,10 +35,30 @@ public class Library {
             if (book.getBookId() == bookId) {
                 return book;
             }
-
         }
 
         return null;
     }
 
+    // Issue Book
+    public void issueBook(int bookId) {
+
+        Book book = searchBookById(bookId);
+
+        if (book == null) {
+
+            System.out.println("Book not found.");
+            return;
+        }
+
+        if (book.isIssued()) {
+
+            System.out.println("Book is already issued.");
+
+        } else {
+
+            book.setIssued(true);
+            System.out.println("Book issued successfully.");
+        }
+    }
 }
