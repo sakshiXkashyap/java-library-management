@@ -1,7 +1,7 @@
-## Day 5 Progress
+## Day 7 Progress
 
-- Learned ArrayList
-- Created Library service
-- Added multiple books
-- Displayed all books using for-each loop
-- Improved project structure
+- Learned Scanner
+- Built menu-driven application
+- Used switch-case
+- Took user input
+- Issued books interactively
