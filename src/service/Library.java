@@ -22,6 +22,11 @@ public class Library {
 
         System.out.println("\n===== Library Books =====");
 
+        if (books.isEmpty()) {
+            System.out.println("No books available.");
+            return;
+        }
+
         for (Book book : books) {
             book.displayBook();
         }
@@ -46,7 +51,6 @@ public class Library {
         Book book = searchBookById(bookId);
 
         if (book == null) {
-
             System.out.println("Book not found.");
             return;
         }
@@ -59,6 +63,34 @@ public class Library {
 
             book.setIssued(true);
             System.out.println("Book issued successfully.");
+
         }
+    }
+
+    // Return Book
+    public void returnBook(int bookId) {
+
+        Book book = searchBookById(bookId);
+
+        if (book == null) {
+            System.out.println("Book not found.");
+            return;
+        }
+
+        if (!book.isIssued()) {
+
+            System.out.println("This book was not issued.");
+
+        } else {
+
+            book.setIssued(false);
+            System.out.println("Book returned successfully.");
+
+        }
+    }
+
+    // Show Total Books
+    public void showTotalBooks() {
+        System.out.println("Total Books : " + books.size());
     }
 }
