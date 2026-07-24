@@ -23,10 +23,11 @@ public class Main {
             System.out.println("\n========== LIBRARY MENU ==========");
             System.out.println("1. View All Books");
             System.out.println("2. Search Book");
-            System.out.println("3. Issue Book");
-            System.out.println("4. Return Book");
-            System.out.println("5. Show Total Books");
-            System.out.println("6. Exit");
+            System.out.println("3. Add New Book");
+            System.out.println("4. Issue Book");
+            System.out.println("5. Return Book");
+            System.out.println("6. Show Total Books");
+            System.out.println("7. Exit");
 
             System.out.print("\nEnter your choice: ");
             choice = scanner.nextInt();
@@ -59,6 +60,34 @@ public class Main {
 
                 case 3:
 
+                    scanner.nextLine();
+
+                    System.out.print("Enter Book ID: ");
+                    int id = scanner.nextInt();
+                    scanner.nextLine();
+
+                    System.out.print("Enter Book Title: ");
+                    String title = scanner.nextLine();
+
+                    System.out.print("Enter Author Name: ");
+                    String author = scanner.nextLine();
+
+                    Book newBook = new Book(id, title, author);
+
+                    if (library.addNewBook(newBook)) {
+
+                        System.out.println("Book added successfully.");
+
+                    } else {
+
+                        System.out.println("Book ID already exists.");
+
+                    }
+
+                    break;
+
+                case 4:
+
                     System.out.print("Enter Book ID: ");
                     int issueId = scanner.nextInt();
 
@@ -66,7 +95,7 @@ public class Main {
 
                     break;
 
-                case 4:
+                case 5:
 
                     System.out.print("Enter Book ID: ");
                     int returnId = scanner.nextInt();
@@ -75,23 +104,23 @@ public class Main {
 
                     break;
 
-                case 5:
+                case 6:
 
                     library.showTotalBooks();
 
                     break;
 
-                case 6:
+                case 7:
 
                     System.out.println("Thank you for using Library Management System.");
                     break;
 
                 default:
 
-                    System.out.println("Invalid Choice. Please try again.");
+                    System.out.println("Invalid Choice.");
             }
 
-        } while (choice != 6);
+        } while (choice != 7);
 
         scanner.close();
     }

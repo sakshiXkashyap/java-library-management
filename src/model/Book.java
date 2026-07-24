@@ -40,7 +40,6 @@ public class Book {
         System.out.println("Book ID : " + bookId);
         System.out.println("Title   : " + title);
         System.out.println("Author  : " + author);
-        System.out.println("Issued  : " + issued);
-
+        System.out.println("Status  : " + (issued ? "Issued" : "Available"));
     }
 }

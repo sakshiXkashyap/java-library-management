@@ -12,15 +12,26 @@ public class Library {
         books = new ArrayList<>();
     }
 
-    // Add Book
+    // Add Default Book
     public void addBook(Book book) {
         books.add(book);
+    }
+
+    // Add New Book with Validation
+    public boolean addNewBook(Book book) {
+
+        if (searchBookById(book.getBookId()) != null) {
+            return false;
+        }
+
+        books.add(book);
+        return true;
     }
 
     // Display All Books
     public void displayAllBooks() {
 
-        System.out.println("\n===== Library Books =====");
+        System.out.println("\n========== LIBRARY BOOKS ==========");
 
         if (books.isEmpty()) {
             System.out.println("No books available.");
@@ -32,7 +43,7 @@ public class Library {
         }
     }
 
-    // Search Book By ID
+    // Search Book
     public Book searchBookById(int bookId) {
 
         for (Book book : books) {
@@ -40,6 +51,7 @@ public class Library {
             if (book.getBookId() == bookId) {
                 return book;
             }
+
         }
 
         return null;
