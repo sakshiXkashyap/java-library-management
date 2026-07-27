@@ -26,8 +26,9 @@ public class Main {
             System.out.println("3. Add New Book");
             System.out.println("4. Issue Book");
             System.out.println("5. Return Book");
-            System.out.println("6. Show Total Books");
-            System.out.println("7. Exit");
+            System.out.println("6. Delete Book");
+            System.out.println("7. Show Total Books");
+            System.out.println("8. Exit");
 
             System.out.print("\nEnter your choice: ");
             choice = scanner.nextInt();
@@ -60,7 +61,7 @@ public class Main {
 
                 case 3:
 
-                    scanner.nextLine();
+                    scanner.nextLine(); // Clear buffer
 
                     System.out.print("Enter Book ID: ");
                     int id = scanner.nextInt();
@@ -106,21 +107,38 @@ public class Main {
 
                 case 6:
 
-                    library.showTotalBooks();
+                    System.out.print("Enter Book ID: ");
+                    int deleteId = scanner.nextInt();
+
+                    if (library.deleteBook(deleteId)) {
+
+                        System.out.println("Book deleted successfully.");
+
+                    } else {
+
+                        System.out.println("Book could not be deleted.");
+
+                    }
 
                     break;
 
                 case 7:
+
+                    library.showTotalBooks();
+
+                    break;
+
+                case 8:
 
                     System.out.println("Thank you for using Library Management System.");
                     break;
 
                 default:
 
-                    System.out.println("Invalid Choice.");
+                    System.out.println("Invalid Choice. Please try again.");
             }
 
-        } while (choice != 7);
+        } while (choice != 8);
 
         scanner.close();
     }

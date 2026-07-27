@@ -1,7 +1,10 @@
-## Day 7 Progress
+## Day 10 Progress
 
-- Learned Scanner
-- Built menu-driven application
-- Used switch-case
-- Took user input
-- Issued books interactively
+### Features Added
+- Delete Book
+- Prevent deletion of issued books
+
+### Concepts Learned
+- ArrayList.remove()
+- CRUD (Delete)
+- Business Validation

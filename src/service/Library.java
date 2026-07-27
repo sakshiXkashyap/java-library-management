@@ -101,6 +101,24 @@ public class Library {
         }
     }
 
+    // Delete Book
+    public boolean deleteBook(int bookId) {
+
+        Book book = searchBookById(bookId);
+
+        if (book == null) {
+            return false;
+        }
+
+        if (book.isIssued()) {
+            System.out.println("Cannot delete an issued book.");
+            return false;
+        }
+
+        books.remove(book);
+        return true;
+    }
+
     // Show Total Books
     public void showTotalBooks() {
         System.out.println("Total Books : " + books.size());
