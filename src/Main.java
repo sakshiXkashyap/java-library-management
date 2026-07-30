@@ -130,7 +130,14 @@ public class Main {
 
                 case 8:
 
+                    library.saveLibrary();
+
+                    break;
+
+                case 9:
+
                     System.out.println("Thank you for using Library Management System.");
+
                     break;
 
                 default:
@@ -138,7 +145,7 @@ public class Main {
                     System.out.println("Invalid Choice. Please try again.");
             }
 
-        } while (choice != 8);
+        } while (choice != 9);
 
         scanner.close();
     }

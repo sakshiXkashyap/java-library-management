@@ -1,10 +1,11 @@
-## Day 10 Progress
+## Day 11 Progress
 
 ### Features Added
-- Delete Book
-- Prevent deletion of issued books
+- Save library to file
+- File handling using FileWriter
+- Exception handling with try-catch
 
 ### Concepts Learned
-- ArrayList.remove()
-- CRUD (Delete)
-- Business Validation
+- FileWriter
+- IOException
+- Data Persistence

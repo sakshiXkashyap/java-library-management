@@ -1,6 +1,8 @@
 package service;
 
 import model.Book;
+import util.FileManager;
+
 import java.util.ArrayList;
 
 public class Library {
@@ -17,7 +19,7 @@ public class Library {
         books.add(book);
     }
 
-    // Add New Book with Validation
+    // Add New Book with Duplicate Validation
     public boolean addNewBook(Book book) {
 
         if (searchBookById(book.getBookId()) != null) {
@@ -43,7 +45,7 @@ public class Library {
         }
     }
 
-    // Search Book
+    // Search Book By ID
     public Book searchBookById(int bookId) {
 
         for (Book book : books) {
@@ -121,6 +123,16 @@ public class Library {
 
     // Show Total Books
     public void showTotalBooks() {
+
         System.out.println("Total Books : " + books.size());
+
     }
+
+    // Save Library Data to File
+    public void saveLibrary() {
+
+        FileManager.saveBooks(books);
+
+    }
+
 }
