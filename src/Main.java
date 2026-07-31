@@ -10,9 +10,13 @@ public class Main {
         Library library = new Library();
 
         // Default Books
-        library.addBook(new Book(101, "Java Programming", "James Gosling"));
-        library.addBook(new Book(102, "Clean Code", "Robert C. Martin"));
-        library.addBook(new Book(103, "Effective Java", "Joshua Bloch"));
+        if (library.searchBookById(101) == null) {
+
+            library.addBook(new Book(101, "Java Programming", "James Gosling"));
+            library.addBook(new Book(102, "Clean Code", "Robert C. Martin"));
+            library.addBook(new Book(103, "Effective Java", "Joshua Bloch"));
+
+        }
 
         Scanner scanner = new Scanner(System.in);
 

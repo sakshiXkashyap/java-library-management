@@ -1,11 +1,11 @@
-## Day 11 Progress
+## Day 12 Progress
 
 ### Features Added
-- Save library to file
-- File handling using FileWriter
-- Exception handling with try-catch
+- Load books from file
+- Automatic library initialization
 
 ### Concepts Learned
-- FileWriter
-- IOException
-- Data Persistence
+- FileReader
+- BufferedReader
+- String.split()
+- Data Parsing

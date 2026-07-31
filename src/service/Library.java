@@ -11,7 +11,9 @@ public class Library {
 
     // Constructor
     public Library() {
-        books = new ArrayList<>();
+
+        books = FileManager.loadBooks();
+
     }
 
     // Add Default Book
