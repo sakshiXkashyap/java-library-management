@@ -1,5 +1,6 @@
 package service;
 
+import exception.BookNotFoundException;
 import model.Book;
 import util.FileManager;
 
@@ -11,17 +12,15 @@ public class Library {
 
     // Constructor
     public Library() {
-
         books = FileManager.loadBooks();
-
     }
 
-    // Add Default Book
+    // Add default book
     public void addBook(Book book) {
         books.add(book);
     }
 
-    // Add New Book with Duplicate Validation
+    // Add new book with duplicate ID validation
     public boolean addNewBook(Book book) {
 
         if (searchBookById(book.getBookId()) != null) {
@@ -32,7 +31,7 @@ public class Library {
         return true;
     }
 
-    // Display All Books
+    // Display all books
     public void displayAllBooks() {
 
         System.out.println("\n========== LIBRARY BOOKS ==========");
@@ -47,7 +46,7 @@ public class Library {
         }
     }
 
-    // Search Book By ID
+    // Search book by ID
     public Book searchBookById(int bookId) {
 
         for (Book book : books) {
@@ -55,18 +54,33 @@ public class Library {
             if (book.getBookId() == bookId) {
                 return book;
             }
-
         }
 
         return null;
     }
 
-    // Issue Book
+    // Get book or throw custom exception
+    public Book getBookOrThrow(int bookId) {
+
+        Book book = searchBookById(bookId);
+
+        if (book == null) {
+
+            throw new BookNotFoundException(
+                    "Book with ID " + bookId + " was not found."
+            );
+        }
+
+        return book;
+    }
+
+    // Issue book
     public void issueBook(int bookId) {
 
         Book book = searchBookById(bookId);
 
         if (book == null) {
+
             System.out.println("Book not found.");
             return;
         }
@@ -78,17 +92,18 @@ public class Library {
         } else {
 
             book.setIssued(true);
-            System.out.println("Book issued successfully.");
 
+            System.out.println("Book issued successfully.");
         }
     }
 
-    // Return Book
+    // Return book
     public void returnBook(int bookId) {
 
         Book book = searchBookById(bookId);
 
         if (book == null) {
+
             System.out.println("Book not found.");
             return;
         }
@@ -100,41 +115,42 @@ public class Library {
         } else {
 
             book.setIssued(false);
-            System.out.println("Book returned successfully.");
 
+            System.out.println("Book returned successfully.");
         }
     }
 
-    // Delete Book
+    // Delete book
     public boolean deleteBook(int bookId) {
 
         Book book = searchBookById(bookId);
 
         if (book == null) {
+
+            System.out.println("Book not found.");
             return false;
         }
 
         if (book.isIssued()) {
+
             System.out.println("Cannot delete an issued book.");
             return false;
         }
 
         books.remove(book);
+
         return true;
     }
 
-    // Show Total Books
+    // Show total books
     public void showTotalBooks() {
 
         System.out.println("Total Books : " + books.size());
-
     }
 
-    // Save Library Data to File
+    // Save library data
     public void saveLibrary() {
 
         FileManager.saveBooks(books);
-
     }
-
 }

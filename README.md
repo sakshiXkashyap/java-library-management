@@ -1,11 +1,11 @@
-## Day 12 Progress
+## Day 13 Progress
 
 ### Features Added
-- Load books from file
-- Automatic library initialization
+- Custom BookNotFoundException
+- Exception-based book validation
 
 ### Concepts Learned
-- FileReader
-- BufferedReader
-- String.split()
-- Data Parsing
+- RuntimeException
+- Custom Exceptions
+- try-catch
+- Exception propagation
