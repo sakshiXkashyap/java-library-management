@@ -1,11 +1,11 @@
-## Day 13 Progress
+## Day 14 Progress
 
-### Features Added
-- Custom BookNotFoundException
-- Exception-based book validation
+### Feature Added
+- Book issue and return transaction history
 
 ### Concepts Learned
-- RuntimeException
-- Custom Exceptions
-- try-catch
-- Exception propagation
+- Object relationships
+- ArrayList of custom objects
+- LocalDateTime
+- Transaction tracking
+- Service-layer business logic

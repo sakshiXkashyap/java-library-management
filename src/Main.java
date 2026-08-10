@@ -32,7 +32,8 @@ public class Main {
             System.out.println("5. Return Book");
             System.out.println("6. Delete Book");
             System.out.println("7. Show Total Books");
-            System.out.println("8. Exit");
+            System.out.println("8. Transaction History");
+            System.out.println("9. Exit");
 
             System.out.print("\nEnter your choice: ");
             choice = scanner.nextInt();
@@ -134,7 +135,7 @@ public class Main {
 
                 case 8:
 
-                    library.saveLibrary();
+                    library.displayTransactionHistory();
 
                     break;
 

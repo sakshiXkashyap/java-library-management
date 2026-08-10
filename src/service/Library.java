@@ -5,14 +5,21 @@ import model.Book;
 import util.FileManager;
 
 import java.util.ArrayList;
+import java.util.ArrayList;
+import java.time.LocalDateTime;
+import model.Transaction;
 
 public class Library {
 
     private ArrayList<Book> books;
+    private ArrayList<Transaction> transactions;
 
     // Constructor
     public Library() {
+
         books = FileManager.loadBooks();
+        transactions = new ArrayList<>();
+
     }
 
     // Add default book
@@ -94,6 +101,14 @@ public class Library {
             book.setIssued(true);
 
             System.out.println("Book issued successfully.");
+
+            transactions.add(
+                    new Transaction(
+                            bookId,
+                            "ISSUED",
+                            LocalDateTime.now().toString()
+                    )
+            );
         }
     }
 
@@ -117,6 +132,14 @@ public class Library {
             book.setIssued(false);
 
             System.out.println("Book returned successfully.");
+
+            transactions.add(
+                    new Transaction(
+                            bookId,
+                            "RETURNED",
+                            LocalDateTime.now().toString()
+                    )
+            );
         }
     }
 
@@ -152,5 +175,21 @@ public class Library {
     public void saveLibrary() {
 
         FileManager.saveBooks(books);
+    }
+
+    public void displayTransactionHistory() {
+
+        System.out.println("\n========== TRANSACTION HISTORY ==========");
+
+        if (transactions.isEmpty()) {
+
+            System.out.println("No transactions found.");
+            return;
+        }
+
+        for (Transaction transaction : transactions) {
+
+            transaction.displayTransaction();
+        }
     }
 }
