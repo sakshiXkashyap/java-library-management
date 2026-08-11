@@ -1,6 +1,6 @@
-package exception;
+package excaption;
 
-public class BookNotFoundException extends RuntimeException {
+public class BookNotFoundException extends Exception {
 
     public BookNotFoundException(String message) {
         super(message);

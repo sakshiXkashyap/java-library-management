@@ -1,11 +1,18 @@
-## Day 14 Progress
+## Day 15 Progress
 
-### Feature Added
-- Book issue and return transaction history
+### Features Added
+- Custom business exceptions
+- Book issue validation
+- Book return validation
+- Book existence validation
+
+### Exceptions
+- BookNotFoundException
+- BookAlreadyIssuedException
+- BookNotIssuedException
 
 ### Concepts Learned
-- Object relationships
-- ArrayList of custom objects
-- LocalDateTime
-- Transaction tracking
-- Service-layer business logic
+- Custom RuntimeException
+- Exception handling
+- Business rules
+- Service-layer validation

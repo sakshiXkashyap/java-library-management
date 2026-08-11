@@ -2,6 +2,9 @@ import model.Book;
 import service.Library;
 
 import java.util.Scanner;
+import excaption.BookAlreadyIssuedException;
+import excaption.BookNotFoundException;
+import excaption.BookNotIssuedException;
 
 public class Main {
 
@@ -97,7 +100,15 @@ public class Main {
                     System.out.print("Enter Book ID: ");
                     int issueId = scanner.nextInt();
 
-                    library.issueBook(issueId);
+                    try {
+
+                        library.issueBook(issueId);
+
+                    } catch (BookNotFoundException |
+                             BookAlreadyIssuedException e) {
+
+                        System.out.println("Error: " + e.getMessage());
+                    }
 
                     break;
 
@@ -106,7 +117,15 @@ public class Main {
                     System.out.print("Enter Book ID: ");
                     int returnId = scanner.nextInt();
 
-                    library.returnBook(returnId);
+                    try {
+
+                        library.returnBook(returnId);
+
+                    } catch (BookNotFoundException |
+                             BookNotIssuedException e) {
+
+                        System.out.println("Error: " + e.getMessage());
+                    }
 
                     break;
 
