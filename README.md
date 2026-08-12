@@ -1,18 +1,15 @@
 ## Day 15 Progress
 
-### Features Added
-- Custom business exceptions
-- Book issue validation
-- Book return validation
-- Book existence validation
-
-### Exceptions
-- BookNotFoundException
-- BookAlreadyIssuedException
-- BookNotIssuedException
+### Feature Added
+- Custom exception handling for library operations
+- Book not found exception
+- Book already issued exception
+- Exception handling using try-catch
 
 ### Concepts Learned
-- Custom RuntimeException
-- Exception handling
-- Business rules
-- Service-layer validation
+- Exception
+- throw
+- throws
+- try-catch
+- Custom exceptions
+- Error handling

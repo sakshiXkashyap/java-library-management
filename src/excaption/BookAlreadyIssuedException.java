@@ -1,6 +1,6 @@
 package excaption;
 
-public class BookAlreadyIssuedException extends RuntimeException {
+public class BookAlreadyIssuedException extends Exception {
 
     public BookAlreadyIssuedException(String message) {
         super(message);

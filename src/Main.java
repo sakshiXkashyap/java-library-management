@@ -104,8 +104,11 @@ public class Main {
 
                         library.issueBook(issueId);
 
-                    } catch (BookNotFoundException |
-                             BookAlreadyIssuedException e) {
+                    } catch (BookNotFoundException e) {
+
+                        System.out.println("Error: " + e.getMessage());
+
+                    } catch (BookAlreadyIssuedException e) {
 
                         System.out.println("Error: " + e.getMessage());
                     }
