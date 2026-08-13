@@ -49,19 +49,22 @@ public class Library {
     }
 
     // Issue book
-    public void issueBook(int bookId) throws BookNotFoundException,
-            BookAlreadyIssuedException {
+    public void issueBook(int bookId, int studentId)
+            throws BookNotFoundException, BookAlreadyIssuedException {
 
         Book book = searchBookById(bookId);
 
         if (book == null) {
-            throw new BookNotFoundException("Book with ID "
-                    + bookId + " not found.");
+
+            throw new BookNotFoundException(
+                    "Book with ID " + bookId + " was not found."
+            );
         }
 
         if (book.isIssued()) {
+
             throw new BookAlreadyIssuedException(
-                    "Book is already issued."
+                    "Book with ID " + bookId + " is already issued."
             );
         }
 
@@ -70,14 +73,14 @@ public class Library {
         transactions.add(
                 new Transaction(
                         bookId,
-                        "ISSUED",
+                        "ISSUED by Student " + studentId,
                         LocalDateTime.now().toString()
                 )
         );
 
-        FileManager.saveBooks(books);
-
-        System.out.println("Book issued successfully.");
+        System.out.println(
+                "Book issued successfully to Student ID: " + studentId
+        );
     }
 
     // Return book

@@ -5,10 +5,22 @@ import java.util.Scanner;
 import excaption.BookAlreadyIssuedException;
 import excaption.BookNotFoundException;
 import excaption.BookNotIssuedException;
-
+import model.Student;
 public class Main {
 
     public static void main(String[] args) {
+
+        Student student1 = new Student(
+                1,
+                "Sakshi Kashyap",
+                "sakshi@example.com"
+        );
+
+        Student student2 = new Student(
+                2,
+                "Rahul Kumar",
+                "rahul@example.com"
+        );
 
         Library library = new Library();
 
@@ -97,18 +109,30 @@ public class Main {
 
                 case 4:
 
+                    System.out.print("Enter Student ID: ");
+                    int studentId = scanner.nextInt();
+
+                    Student selectedStudent = null;
+
+                    if (studentId == student1.getStudentId()) {
+                        selectedStudent = student1;
+                    } else if (studentId == student2.getStudentId()) {
+                        selectedStudent = student2;
+                    }
+
+                    if (selectedStudent == null) {
+                        System.out.println("Student not found.");
+                        break;
+                    }
+
                     System.out.print("Enter Book ID: ");
                     int issueId = scanner.nextInt();
 
                     try {
 
-                        library.issueBook(issueId);
+                        library.issueBook(issueId, selectedStudent.getStudentId());
 
-                    } catch (BookNotFoundException e) {
-
-                        System.out.println("Error: " + e.getMessage());
-
-                    } catch (BookAlreadyIssuedException e) {
+                    } catch (Exception e) {
 
                         System.out.println("Error: " + e.getMessage());
                     }
