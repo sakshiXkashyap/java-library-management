@@ -3,6 +3,7 @@ package service;
 import excaption.BookAlreadyIssuedException;
 import excaption.BookNotFoundException;
 import model.Book;
+import model.Student;
 import model.Transaction;
 import util.FileManager;
 
@@ -12,30 +13,63 @@ import java.util.ArrayList;
 public class Library {
 
     private ArrayList<Book> books;
+    private ArrayList<Student> students;
     private ArrayList<Transaction> transactions;
 
     // Constructor
     public Library() {
+
         books = FileManager.loadBooks();
+
+        if (books == null) {
+            books = new ArrayList<>();
+        }
+
+        students = new ArrayList<>();
         transactions = new ArrayList<>();
+
+        System.out.println("Books loaded successfully.");
     }
+
+    // ==============================
+    // BOOK METHODS
+    // ==============================
 
     // Add default book
     public void addBook(Book book) {
         books.add(book);
     }
 
+    // Add new book with duplicate ID checking
+    public boolean addNewBook(Book book) {
+
+        if (searchBookById(book.getBookId()) != null) {
+            return false;
+        }
+
+        books.add(book);
+
+        FileManager.saveBooks(books);
+
+        return true;
+    }
+
     // Display all books
     public void displayAllBooks() {
 
-        System.out.println("\n===== Library Books =====");
+        System.out.println("\n========== ALL BOOKS ==========");
+
+        if (books.isEmpty()) {
+            System.out.println("No books available.");
+            return;
+        }
 
         for (Book book : books) {
             book.displayBook();
         }
     }
 
-    // Search book
+    // Search book by ID
     public Book searchBookById(int bookId) {
 
         for (Book book : books) {
@@ -48,12 +82,65 @@ public class Library {
         return null;
     }
 
-    // Issue book
+    // Delete book
+    public void deleteBook(int bookId) {
+
+        Book book = searchBookById(bookId);
+
+        if (book == null) {
+
+            System.out.println("Book not found.");
+            return;
+        }
+
+        books.remove(book);
+
+        FileManager.saveBooks(books);
+
+        System.out.println("Book deleted successfully.");
+    }
+
+    // Show total books
+    public void showTotalBooks() {
+
+        System.out.println("\nTotal Books: " + books.size());
+    }
+
+
+    // ==============================
+    // STUDENT METHODS
+    // ==============================
+
+    // Add student
+    public void addStudent(Student student) {
+
+        students.add(student);
+    }
+
+    // Search student by ID
+    public Student searchStudentById(int studentId) {
+
+        for (Student student : students) {
+
+            if (student.getStudentId() == studentId) {
+                return student;
+            }
+        }
+
+        return null;
+    }
+
+
+    // ==============================
+    // ISSUE BOOK
+    // ==============================
+
     public void issueBook(int bookId, int studentId)
             throws BookNotFoundException, BookAlreadyIssuedException {
 
         Book book = searchBookById(bookId);
 
+        // Check book
         if (book == null) {
 
             throw new BookNotFoundException(
@@ -61,6 +148,19 @@ public class Library {
             );
         }
 
+        // Check student
+        Student student = searchStudentById(studentId);
+
+        if (student == null) {
+
+            System.out.println(
+                    "Student with ID " + studentId + " was not found."
+            );
+
+            return;
+        }
+
+        // Check whether book is already issued
         if (book.isIssued()) {
 
             throw new BookAlreadyIssuedException(
@@ -68,34 +168,43 @@ public class Library {
             );
         }
 
+        // Issue book
         book.setIssued(true);
 
+        // Add transaction
         transactions.add(
                 new Transaction(
                         bookId,
-                        "ISSUED by Student " + studentId,
+                        "ISSUED TO STUDENT " + studentId,
                         LocalDateTime.now().toString()
                 )
         );
 
-        System.out.println(
-                "Book issued successfully to Student ID: " + studentId
-        );
+        // Save books
+        FileManager.saveBooks(books);
+
+        System.out.println("Book issued successfully.");
+        System.out.println("Issued to: " + student.getName());
     }
 
-    // Return book
-    public void returnBook(int bookId) throws BookNotFoundException {
+
+    // ==============================
+    // RETURN BOOK
+    // ==============================
+
+    public void returnBook(int bookId) {
 
         Book book = searchBookById(bookId);
 
         if (book == null) {
-            throw new BookNotFoundException(
-                    "Book with ID " + bookId + " not found."
-            );
+
+            System.out.println("Book not found.");
+            return;
         }
 
         if (!book.isIssued()) {
-            System.out.println("This book was not issued.");
+
+            System.out.println("This book is not currently issued.");
             return;
         }
 
@@ -114,58 +223,24 @@ public class Library {
         System.out.println("Book returned successfully.");
     }
 
-    // Display transaction history
+
+    // ==============================
+    // TRANSACTION HISTORY
+    // ==============================
+
     public void displayTransactionHistory() {
 
-        System.out.println("\n===== TRANSACTION HISTORY =====");
+        System.out.println("\n========== TRANSACTION HISTORY ==========");
 
         if (transactions.isEmpty()) {
-            System.out.println("No transactions found.");
+
+            System.out.println("No transactions available.");
             return;
         }
 
         for (Transaction transaction : transactions) {
-            System.out.println(transaction);
+
+            transaction.displayTransaction();
         }
-    }
-
-    // Add a new book
-    public boolean addNewBook(Book book) {
-
-        if (searchBookById(book.getBookId()) != null) {
-            return false;
-        }
-
-        books.add(book);
-        FileManager.saveBooks(books);
-
-        return true;
-    }
-
-
-    // Delete a book
-    public boolean deleteBook(int bookId) {
-
-        Book book = searchBookById(bookId);
-
-        if (book == null) {
-            System.out.println("Book not found.");
-            return false;
-        }
-
-        books.remove(book);
-
-        FileManager.saveBooks(books);
-
-        System.out.println("Book deleted successfully.");
-
-        return true;
-    }
-
-
-    // Show total books
-    public void showTotalBooks() {
-
-        System.out.println("Total Books: " + books.size());
     }
 }

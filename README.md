@@ -1,15 +1,15 @@
-## Day 15 Progress
+## Day 16 Progress
 
 ### Feature Added
-- Custom exception handling for library operations
-- Book not found exception
-- Book already issued exception
-- Exception handling using try-catch
+- Student-based book issuing
+- Student validation
+- Book issued to a specific student
+- Student information added to transaction history
 
 ### Concepts Learned
-- Exception
-- throw
-- throws
-- try-catch
-- Custom exceptions
-- Error handling
+- Object relationships
+- ArrayList of custom objects
+- Searching objects by ID
+- Method parameters
+- Exception handling
+- Transaction tracking

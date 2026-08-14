@@ -1,45 +1,103 @@
+import excaption.BookAlreadyIssuedException;
+import excaption.BookNotFoundException;
 import model.Book;
+import model.Student;
 import service.Library;
 
 import java.util.Scanner;
-import excaption.BookAlreadyIssuedException;
-import excaption.BookNotFoundException;
-import excaption.BookNotIssuedException;
-import model.Student;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        Student student1 = new Student(
-                1,
-                "Sakshi Kashyap",
-                "sakshi@example.com"
-        );
-
-        Student student2 = new Student(
-                2,
-                "Rahul Kumar",
-                "rahul@example.com"
-        );
+        System.out.println("\n======================================");
+        System.out.println("     LIBRARY MANAGEMENT SYSTEM");
+        System.out.println("======================================");
 
         Library library = new Library();
 
-        // Default Books
+
+        // ==========================================
+        // DEFAULT BOOKS
+        // ==========================================
+
         if (library.searchBookById(101) == null) {
-
-            library.addBook(new Book(101, "Java Programming", "James Gosling"));
-            library.addBook(new Book(102, "Clean Code", "Robert C. Martin"));
-            library.addBook(new Book(103, "Effective Java", "Joshua Bloch"));
-
+            library.addBook(
+                    new Book(
+                            101,
+                            "Java Programming",
+                            "James Gosling"
+                    )
+            );
         }
+
+        if (library.searchBookById(102) == null) {
+            library.addBook(
+                    new Book(
+                            102,
+                            "Clean Code",
+                            "Robert C. Martin"
+                    )
+            );
+        }
+
+        if (library.searchBookById(103) == null) {
+            library.addBook(
+                    new Book(
+                            103,
+                            "Effective Java",
+                            "Joshua Bloch"
+                    )
+            );
+        }
+
+
+        // ==========================================
+        // DEFAULT STUDENTS
+        // ==========================================
+
+        library.addStudent(
+                new Student(
+                        201,
+                        "Sakshi",
+                        "MCA"
+                )
+        );
+
+        library.addStudent(
+                new Student(
+                        202,
+                        "Rahul",
+                        "BCA"
+                )
+        );
+
+        library.addStudent(
+                new Student(
+                        203,
+                        "Priya",
+                        "B.Tech"
+                )
+        );
+
+
+        // ==========================================
+        // SCANNER
+        // ==========================================
 
         Scanner scanner = new Scanner(System.in);
 
         int choice;
 
+
+        // ==========================================
+        // MAIN MENU
+        // ==========================================
+
         do {
 
             System.out.println("\n========== LIBRARY MENU ==========");
+
             System.out.println("1. View All Books");
             System.out.println("2. Search Book");
             System.out.println("3. Add New Book");
@@ -51,25 +109,45 @@ public class Main {
             System.out.println("9. Exit");
 
             System.out.print("\nEnter your choice: ");
+
             choice = scanner.nextInt();
 
+
+            // ==========================================
+            // MENU OPTIONS
+            // ==========================================
+
             switch (choice) {
+
+
+                // --------------------------------------
+                // 1. VIEW ALL BOOKS
+                // --------------------------------------
 
                 case 1:
 
                     library.displayAllBooks();
+
                     break;
+
+
+                // --------------------------------------
+                // 2. SEARCH BOOK
+                // --------------------------------------
 
                 case 2:
 
                     System.out.print("Enter Book ID: ");
+
                     int searchId = scanner.nextInt();
 
-                    Book foundBook = library.searchBookById(searchId);
+                    Book foundBook =
+                            library.searchBookById(searchId);
 
                     if (foundBook != null) {
 
                         System.out.println("\nBook Found:");
+
                         foundBook.displayBook();
 
                     } else {
@@ -79,99 +157,119 @@ public class Main {
 
                     break;
 
+
+                // --------------------------------------
+                // 3. ADD NEW BOOK
+                // --------------------------------------
+
                 case 3:
 
-                    scanner.nextLine(); // Clear buffer
-
                     System.out.print("Enter Book ID: ");
+
                     int id = scanner.nextInt();
+
                     scanner.nextLine();
 
                     System.out.print("Enter Book Title: ");
+
                     String title = scanner.nextLine();
 
                     System.out.print("Enter Author Name: ");
+
                     String author = scanner.nextLine();
 
-                    Book newBook = new Book(id, title, author);
+
+                    Book newBook =
+                            new Book(id, title, author);
+
 
                     if (library.addNewBook(newBook)) {
 
-                        System.out.println("Book added successfully.");
+                        System.out.println(
+                                "Book added successfully."
+                        );
 
                     } else {
 
-                        System.out.println("Book ID already exists.");
-
+                        System.out.println(
+                                "Book ID already exists."
+                        );
                     }
 
                     break;
+
+
+                // --------------------------------------
+                // 4. ISSUE BOOK
+                // --------------------------------------
 
                 case 4:
 
+                    System.out.print("Enter Book ID: ");
+
+                    int issueId = scanner.nextInt();
+
                     System.out.print("Enter Student ID: ");
+
                     int studentId = scanner.nextInt();
 
-                    Student selectedStudent = null;
-
-                    if (studentId == student1.getStudentId()) {
-                        selectedStudent = student1;
-                    } else if (studentId == student2.getStudentId()) {
-                        selectedStudent = student2;
-                    }
-
-                    if (selectedStudent == null) {
-                        System.out.println("Student not found.");
-                        break;
-                    }
-
-                    System.out.print("Enter Book ID: ");
-                    int issueId = scanner.nextInt();
 
                     try {
 
-                        library.issueBook(issueId, selectedStudent.getStudentId());
+                        library.issueBook(
+                                issueId,
+                                studentId
+                        );
 
-                    } catch (Exception e) {
+                    } catch (BookNotFoundException e) {
 
-                        System.out.println("Error: " + e.getMessage());
+                        System.out.println(
+                                "Error: " + e.getMessage()
+                        );
+
+                    } catch (BookAlreadyIssuedException e) {
+
+                        System.out.println(
+                                "Error: " + e.getMessage()
+                        );
                     }
 
                     break;
+
+
+                // --------------------------------------
+                // 5. RETURN BOOK
+                // --------------------------------------
 
                 case 5:
 
                     System.out.print("Enter Book ID: ");
+
                     int returnId = scanner.nextInt();
 
-                    try {
-
-                        library.returnBook(returnId);
-
-                    } catch (BookNotFoundException |
-                             BookNotIssuedException e) {
-
-                        System.out.println("Error: " + e.getMessage());
-                    }
+                    library.returnBook(returnId);
 
                     break;
+
+
+                // --------------------------------------
+                // 6. DELETE BOOK
+                // --------------------------------------
 
                 case 6:
 
                     System.out.print("Enter Book ID: ");
+
                     int deleteId = scanner.nextInt();
 
-                    if (library.deleteBook(deleteId)) {
-
-                        System.out.println("Book deleted successfully.");
-
-                    } else {
-
-                        System.out.println("Book could not be deleted.");
-
-                    }
+                    library.deleteBook(deleteId);
 
                     break;
+
+
+                // --------------------------------------
+                // 7. TOTAL BOOKS
+                // --------------------------------------
 
                 case 7:
 
@@ -179,25 +277,47 @@ public class Main {
 
                     break;
 
+
+                // --------------------------------------
+                // 8. TRANSACTION HISTORY
+                // --------------------------------------
+
                 case 8:
 
                     library.displayTransactionHistory();
 
                     break;
 
+
+                // --------------------------------------
+                // 9. EXIT
+                // --------------------------------------
+
                 case 9:
 
-                    System.out.println("Thank you for using Library Management System.");
+                    System.out.println(
+                            "\nThank you for using "
+                                    + "Library Management System."
+                    );
 
                     break;
 
+
+                // --------------------------------------
+                // INVALID CHOICE
+                // --------------------------------------
+
                 default:
 
-                    System.out.println("Invalid Choice. Please try again.");
+                    System.out.println(
+                            "Invalid Choice. Please try again."
+                    );
             }
 
         } while (choice != 9);
 
+
+        // Close scanner
         scanner.close();
     }
 }
