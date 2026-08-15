@@ -1,15 +1,18 @@
-## Day 16 Progress
+## Day 15 Progress
 
-### Feature Added
-- Student-based book issuing
-- Student validation
-- Book issued to a specific student
-- Student information added to transaction history
+### Features Tested
 
-### Concepts Learned
-- Object relationships
-- ArrayList of custom objects
-- Searching objects by ID
-- Method parameters
+- Issue book with student ID
+- Prevent duplicate book issuing
+- Return issued book
+- Transaction history
+- Book not found exception handling
+
+### Concepts Practiced
+
+- Custom exceptions
 - Exception handling
+- Object relationships
 - Transaction tracking
+- LocalDateTime
+- Service-layer business logic
