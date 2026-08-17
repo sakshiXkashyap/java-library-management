@@ -16,7 +16,10 @@ public class Library {
     private ArrayList<Student> students;
     private ArrayList<Transaction> transactions;
 
-    // Constructor
+    // ==============================
+    // CONSTRUCTOR
+    // ==============================
+
     public Library() {
 
         books = FileManager.loadBooks();
@@ -106,7 +109,6 @@ public class Library {
         System.out.println("\nTotal Books: " + books.size());
     }
 
-
     // ==============================
     // STUDENT METHODS
     // ==============================
@@ -129,7 +131,6 @@ public class Library {
 
         return null;
     }
-
 
     // ==============================
     // ISSUE BOOK
@@ -187,7 +188,6 @@ public class Library {
         System.out.println("Issued to: " + student.getName());
     }
 
-
     // ==============================
     // RETURN BOOK
     // ==============================
@@ -208,8 +208,10 @@ public class Library {
             return;
         }
 
+        // Return book
         book.setIssued(false);
 
+        // Add transaction
         transactions.add(
                 new Transaction(
                         bookId,
@@ -218,11 +220,11 @@ public class Library {
                 )
         );
 
+        // Save books
         FileManager.saveBooks(books);
 
         System.out.println("Book returned successfully.");
     }
-
 
     // ==============================
     // TRANSACTION HISTORY
@@ -241,6 +243,32 @@ public class Library {
         for (Transaction transaction : transactions) {
 
             transaction.displayTransaction();
+        }
+    }
+
+    // ==============================
+    // AVAILABLE BOOKS
+    // ==============================
+
+    public void showAvailableBooks() {
+
+        System.out.println("\n========== AVAILABLE BOOKS ==========");
+
+        boolean availableBookFound = false;
+
+        for (Book book : books) {
+
+            if (!book.isIssued()) {
+
+                book.displayBook();
+
+                availableBookFound = true;
+            }
+        }
+
+        if (!availableBookFound) {
+
+            System.out.println("No books are currently available.");
         }
     }
 }

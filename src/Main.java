@@ -16,7 +16,6 @@ public class Main {
 
         Library library = new Library();
 
-
         // ==========================================
         // DEFAULT BOOKS
         // ==========================================
@@ -51,7 +50,6 @@ public class Main {
             );
         }
 
-
         // ==========================================
         // DEFAULT STUDENTS
         // ==========================================
@@ -80,7 +78,6 @@ public class Main {
                 )
         );
 
-
         // ==========================================
         // SCANNER
         // ==========================================
@@ -88,7 +85,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         int choice;
-
 
         // ==========================================
         // MAIN MENU
@@ -104,21 +100,20 @@ public class Main {
             System.out.println("4. Issue Book");
             System.out.println("5. Return Book");
             System.out.println("6. Delete Book");
-            System.out.println("7. Show Total Books");
-            System.out.println("8. Transaction History");
-            System.out.println("9. Exit");
+            System.out.println("7. Show Available Books");
+            System.out.println("8. Show Total Books");
+            System.out.println("9. Transaction History");
+            System.out.println("10. Exit");
 
             System.out.print("\nEnter your choice: ");
 
             choice = scanner.nextInt();
-
 
             // ==========================================
             // MENU OPTIONS
             // ==========================================
 
             switch (choice) {
-
 
                 // --------------------------------------
                 // 1. VIEW ALL BOOKS
@@ -129,7 +124,6 @@ public class Main {
                     library.displayAllBooks();
 
                     break;
-
 
                 // --------------------------------------
                 // 2. SEARCH BOOK
@@ -157,7 +151,6 @@ public class Main {
 
                     break;
 
-
                 // --------------------------------------
                 // 3. ADD NEW BOOK
                 // --------------------------------------
@@ -178,10 +171,8 @@ public class Main {
 
                     String author = scanner.nextLine();
 
-
                     Book newBook =
                             new Book(id, title, author);
-
 
                     if (library.addNewBook(newBook)) {
 
@@ -198,7 +189,6 @@ public class Main {
 
                     break;
 
-
                 // --------------------------------------
                 // 4. ISSUE BOOK
                 // --------------------------------------
@@ -212,7 +202,6 @@ public class Main {
                     System.out.print("Enter Student ID: ");
 
                     int studentId = scanner.nextInt();
-
 
                     try {
 
@@ -236,7 +225,6 @@ public class Main {
 
                     break;
 
-
                 // --------------------------------------
                 // 5. RETURN BOOK
                 // --------------------------------------
@@ -250,7 +238,6 @@ public class Main {
                     library.returnBook(returnId);
 
                     break;
-
 
                 // --------------------------------------
                 // 6. DELETE BOOK
@@ -266,42 +253,47 @@ public class Main {
 
                     break;
 
-
                 // --------------------------------------
-                // 7. TOTAL BOOKS
+                // 7. SHOW AVAILABLE BOOKS
                 // --------------------------------------
 
                 case 7:
+
+                    library.showAvailableBooks();
+
+                    break;
+
+                // --------------------------------------
+                // 8. SHOW TOTAL BOOKS
+                // --------------------------------------
+
+                case 8:
 
                     library.showTotalBooks();
 
                     break;
 
-
                 // --------------------------------------
-                // 8. TRANSACTION HISTORY
+                // 9. TRANSACTION HISTORY
                 // --------------------------------------
 
-                case 8:
+                case 9:
 
                     library.displayTransactionHistory();
 
                     break;
 
-
                 // --------------------------------------
-                // 9. EXIT
+                // 10. EXIT
                 // --------------------------------------
 
-                case 9:
+                case 10:
 
                     System.out.println(
-                            "\nThank you for using "
-                                    + "Library Management System."
+                            "Thank you for using Library Management System."
                     );
 
                     break;
-
 
                 // --------------------------------------
                 // INVALID CHOICE
@@ -314,8 +306,7 @@ public class Main {
                     );
             }
 
-        } while (choice != 9);
-
+        } while (choice != 10);
 
         // Close scanner
         scanner.close();
