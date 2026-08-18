@@ -16,9 +16,9 @@ public class Library {
     private ArrayList<Student> students;
     private ArrayList<Transaction> transactions;
 
-    // ==============================
+    // ==========================================
     // CONSTRUCTOR
-    // ==============================
+    // ==========================================
 
     public Library() {
 
@@ -34,19 +34,23 @@ public class Library {
         System.out.println("Books loaded successfully.");
     }
 
-    // ==============================
+
+    // ==========================================
     // BOOK METHODS
-    // ==============================
+    // ==========================================
 
     // Add default book
     public void addBook(Book book) {
+
         books.add(book);
     }
+
 
     // Add new book with duplicate ID checking
     public boolean addNewBook(Book book) {
 
         if (searchBookById(book.getBookId()) != null) {
+
             return false;
         }
 
@@ -57,20 +61,25 @@ public class Library {
         return true;
     }
 
+
     // Display all books
     public void displayAllBooks() {
 
         System.out.println("\n========== ALL BOOKS ==========");
 
         if (books.isEmpty()) {
+
             System.out.println("No books available.");
+
             return;
         }
 
         for (Book book : books) {
+
             book.displayBook();
         }
     }
+
 
     // Search book by ID
     public Book searchBookById(int bookId) {
@@ -78,12 +87,14 @@ public class Library {
         for (Book book : books) {
 
             if (book.getBookId() == bookId) {
+
                 return book;
             }
         }
 
         return null;
     }
+
 
     // Delete book
     public void deleteBook(int bookId) {
@@ -93,6 +104,7 @@ public class Library {
         if (book == null) {
 
             System.out.println("Book not found.");
+
             return;
         }
 
@@ -103,15 +115,17 @@ public class Library {
         System.out.println("Book deleted successfully.");
     }
 
+
     // Show total books
     public void showTotalBooks() {
 
         System.out.println("\nTotal Books: " + books.size());
     }
 
-    // ==============================
+
+    // ==========================================
     // STUDENT METHODS
-    // ==============================
+    // ==========================================
 
     // Add student
     public void addStudent(Student student) {
@@ -119,12 +133,14 @@ public class Library {
         students.add(student);
     }
 
+
     // Search student by ID
     public Student searchStudentById(int studentId) {
 
         for (Student student : students) {
 
             if (student.getStudentId() == studentId) {
+
                 return student;
             }
         }
@@ -132,22 +148,24 @@ public class Library {
         return null;
     }
 
-    // ==============================
+
+    // ==========================================
     // ISSUE BOOK
-    // ==============================
+    // ==========================================
 
     public void issueBook(int bookId, int studentId)
             throws BookNotFoundException, BookAlreadyIssuedException {
 
         Book book = searchBookById(bookId);
 
-        // Check book
+        // Book doesn't exist
         if (book == null) {
 
             throw new BookNotFoundException(
                     "Book with ID " + bookId + " was not found."
             );
         }
+
 
         // Check student
         Student student = searchStudentById(studentId);
@@ -161,7 +179,8 @@ public class Library {
             return;
         }
 
-        // Check whether book is already issued
+
+        // Book already issued
         if (book.isIssued()) {
 
             throw new BookAlreadyIssuedException(
@@ -169,8 +188,10 @@ public class Library {
             );
         }
 
+
         // Issue book
         book.setIssued(true);
+
 
         // Add transaction
         transactions.add(
@@ -181,35 +202,48 @@ public class Library {
                 )
         );
 
-        // Save books
+
+        // Save changes
         FileManager.saveBooks(books);
+
 
         System.out.println("Book issued successfully.");
         System.out.println("Issued to: " + student.getName());
     }
 
-    // ==============================
+
+    // ==========================================
     // RETURN BOOK
-    // ==============================
+    // ==========================================
 
     public void returnBook(int bookId) {
 
         Book book = searchBookById(bookId);
 
+
+        // Book doesn't exist
         if (book == null) {
 
             System.out.println("Book not found.");
+
             return;
         }
 
+
+        // Book is not issued
         if (!book.isIssued()) {
 
-            System.out.println("This book is not currently issued.");
+            System.out.println(
+                    "This book is not currently issued."
+            );
+
             return;
         }
+
 
         // Return book
         book.setIssued(false);
+
 
         // Add transaction
         transactions.add(
@@ -220,41 +254,25 @@ public class Library {
                 )
         );
 
-        // Save books
+
+        // Save changes
         FileManager.saveBooks(books);
+
 
         System.out.println("Book returned successfully.");
     }
 
-    // ==============================
-    // TRANSACTION HISTORY
-    // ==============================
 
-    public void displayTransactionHistory() {
-
-        System.out.println("\n========== TRANSACTION HISTORY ==========");
-
-        if (transactions.isEmpty()) {
-
-            System.out.println("No transactions available.");
-            return;
-        }
-
-        for (Transaction transaction : transactions) {
-
-            transaction.displayTransaction();
-        }
-    }
-
-    // ==============================
+    // ==========================================
     // AVAILABLE BOOKS
-    // ==============================
+    // ==========================================
 
     public void showAvailableBooks() {
 
         System.out.println("\n========== AVAILABLE BOOKS ==========");
 
         boolean availableBookFound = false;
+
 
         for (Book book : books) {
 
@@ -266,9 +284,40 @@ public class Library {
             }
         }
 
+
         if (!availableBookFound) {
 
-            System.out.println("No books are currently available.");
+            System.out.println(
+                    "No books are currently available."
+            );
+        }
+    }
+
+
+    // ==========================================
+    // TRANSACTION HISTORY
+    // ==========================================
+
+    public void displayTransactionHistory() {
+
+        System.out.println(
+                "\n========== TRANSACTION HISTORY =========="
+        );
+
+
+        if (transactions.isEmpty()) {
+
+            System.out.println(
+                    "No transactions available."
+            );
+
+            return;
+        }
+
+
+        for (Transaction transaction : transactions) {
+
+            transaction.displayTransaction();
         }
     }
 }
