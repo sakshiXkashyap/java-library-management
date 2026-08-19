@@ -1,30 +1,31 @@
-## Day 18 Progress
+## Day 19 Progress
 
 ### Features Tested
 
 - View all books
 - Search book by ID
-- Add new books
+- Add new book
 - Duplicate book ID validation
-- Issue books to students
-- Return books
-- Delete books
+- Issue book
+- Prevent issuing an already issued book
+- Return book
+- Prevent returning an unissued book
+- Delete book
 - Show available books
 - Show total books
 - Transaction history
-- Custom exception handling
-- File persistence
+- Exit functionality
 
 ### Concepts Practiced
 
+- Java OOP
 - ArrayList
-- Object-Oriented Programming
-- Classes and Objects
-- Encapsulation
-- Exception Handling
-- Custom Exceptions
+- Exception handling
+- Custom exceptions
+- Object relationships
+- Service layer
+- File handling
 - LocalDateTime
-- File Handling
-- Service Layer
-- CRUD Operations
-- Menu-driven application
+- Menu-driven applications
+- CRUD operations
+- Input handling with Scanner

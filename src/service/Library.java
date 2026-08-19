@@ -267,6 +267,21 @@ public class Library {
     // AVAILABLE BOOKS
     // ==========================================
 
+
+    public void displayTransactionHistory() {
+
+        System.out.println("\n========== TRANSACTION HISTORY ==========");
+
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions available.");
+            return;
+        }
+
+        for (Transaction transaction : transactions) {
+            transaction.displayTransaction();
+        }
+    }
+
     public void showAvailableBooks() {
 
         System.out.println("\n========== AVAILABLE BOOKS ==========");
@@ -298,26 +313,5 @@ public class Library {
     // TRANSACTION HISTORY
     // ==========================================
 
-    public void displayTransactionHistory() {
 
-        System.out.println(
-                "\n========== TRANSACTION HISTORY =========="
-        );
-
-
-        if (transactions.isEmpty()) {
-
-            System.out.println(
-                    "No transactions available."
-            );
-
-            return;
-        }
-
-
-        for (Transaction transaction : transactions) {
-
-            transaction.displayTransaction();
-        }
-    }
 }
