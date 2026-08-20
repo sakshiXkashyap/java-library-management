@@ -1,31 +1,22 @@
-## Day 19 Progress
+## Day 20 Progress
 
-### Features Tested
+### Student Management
 
-- View all books
-- Search book by ID
-- Add new book
-- Duplicate book ID validation
-- Issue book
-- Prevent issuing an already issued book
-- Return book
-- Prevent returning an unissued book
-- Delete book
-- Show available books
-- Show total books
-- Transaction history
-- Exit functionality
+Added student management functionality:
+
+- Add new student
+- Prevent duplicate student IDs
+- Search student by ID
+- Display all students
+- Delete student
+- Student information displayed using encapsulation
 
 ### Concepts Practiced
 
-- Java OOP
 - ArrayList
-- Exception handling
-- Custom exceptions
-- Object relationships
-- Service layer
-- File handling
-- LocalDateTime
-- Menu-driven applications
+- Encapsulation
 - CRUD operations
+- Object-oriented programming
+- Service layer
+- Menu-driven programming
 - Input handling with Scanner
