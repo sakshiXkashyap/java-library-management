@@ -1,4 +1,4 @@
-101,Java Programming,James Gosling,false
-102,Clean Code,Robert C. Martin,true
+101,Java Programming,James Gosling,true
+102,Clean Code,Robert C. Martin,false
 103,Effective Java,Joshua Bloch,false
 105,Spring Boot,Craig Walls,false

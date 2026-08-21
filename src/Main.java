@@ -128,11 +128,12 @@ public class Main {
             System.out.println("7. Show Available Books");
             System.out.println("8. Show Total Books");
             System.out.println("9. Transaction History");
-            System.out.println("10. View All Students");
-            System.out.println("11. Add New Student");
-            System.out.println("12. Search Student");
-            System.out.println("13. Delete Student");
-            System.out.println("14. Exit");
+            System.out.println("10. Show Total Transactions");
+            System.out.println("11. View All Students");
+            System.out.println("12. Add New Student");
+            System.out.println("13. Search Student");
+            System.out.println("14. Delete Student");
+            System.out.println("15. Exit");
 
 
             System.out.print("\nEnter your choice: ");
@@ -343,7 +344,7 @@ public class Main {
 
                 case 10:
 
-                    library.displayAllStudents();
+                    library.showTotalTransactions();
 
                     break;
 
@@ -354,25 +355,25 @@ public class Main {
 
                 case 11:
 
+                    library.displayAllStudents();
+
+                    break;
+
+                case 12:
+
                     System.out.print("Enter Student ID: ");
 
-                    int newStudentId =
-                            scanner.nextInt();
+                    int newStudentId = scanner.nextInt();
 
                     scanner.nextLine();
 
-
                     System.out.print("Enter Student Name: ");
 
-                    String studentName =
-                            scanner.nextLine();
-
+                    String studentName = scanner.nextLine();
 
                     System.out.print("Enter Course: ");
 
-                    String course =
-                            scanner.nextLine();
-
+                    String course = scanner.nextLine();
 
                     Student newStudent =
                             new Student(
@@ -380,7 +381,6 @@ public class Main {
                                     studentName,
                                     course
                             );
-
 
                     if (library.addNewStudent(newStudent)) {
 
@@ -399,79 +399,49 @@ public class Main {
 
 
                 // =================================================
-                // 12. SEARCH STUDENT
-                // =================================================
-
-                case 12:
-
-                    System.out.print("Enter Student ID: ");
-
-                    int searchStudentId =
-                            scanner.nextInt();
-
-
-                    Student foundStudent =
-                            library.searchStudentById(
-                                    searchStudentId
-                            );
-
-
-                    if (foundStudent != null) {
-
-                        System.out.println(
-                                "\nStudent Found:"
-                        );
-
-                        foundStudent.displayStudent();
-
-                    } else {
-
-                        System.out.println(
-                                "Student Not Found."
-                        );
-                    }
-
-                    break;
-
-
-                // =================================================
                 // 13. DELETE STUDENT
                 // =================================================
 
                 case 13:
 
-                    System.out.print(
-                            "Enter Student ID: "
-                    );
+                    System.out.print("Enter Student ID: ");
 
-                    int deleteStudentId =
-                            scanner.nextInt();
+                    int searchStudentId = scanner.nextInt();
 
+                    Student foundStudent =
+                            library.searchStudentById(searchStudentId);
 
-                    library.deleteStudent(
-                            deleteStudentId
-                    );
+                    if (foundStudent != null) {
+
+                        System.out.println("\nStudent Found:");
+
+                        foundStudent.displayStudent();
+
+                    } else {
+
+                        System.out.println("Student Not Found.");
+                    }
 
                     break;
-
-
-                // =================================================
-                // 14. EXIT
-                // =================================================
 
                 case 14:
 
+                    System.out.print("Enter Student ID: ");
+
+                    int deleteStudentId = scanner.nextInt();
+
+                    library.deleteStudent(deleteStudentId);
+
+                    break;
+
+                case 15:
+
                     System.out.println(
-                            "\nThank you for using " +
-                                    "Library Management System."
+                            "\nThank you for using Library Management System."
                     );
 
                     break;
 
-
-                // =================================================
-                // INVALID CHOICE
-                // =================================================
 
                 default:
 
@@ -480,7 +450,7 @@ public class Main {
                     );
             }
 
-        } while (choice != 14);
+        } while (choice != 15);
 
 
         // =====================================================

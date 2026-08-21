@@ -364,4 +364,11 @@ public class Library {
             transaction.displayTransaction();
         }
     }
+
+    public void showTotalTransactions() {
+
+        System.out.println(
+                "\nTotal Transactions: " + transactions.size()
+        );
+    }
 }

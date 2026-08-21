@@ -1,22 +1,23 @@
-## Day 20 Progress
+## Day 21 Progress
 
-### Student Management
+### Transaction Reporting
 
-Added student management functionality:
+Added transaction reporting functionality:
 
-- Add new student
-- Prevent duplicate student IDs
-- Search student by ID
-- Display all students
-- Delete student
-- Student information displayed using encapsulation
+- Display transaction history
+- Show total number of transactions
+- Record book issue transactions
+- Record book return transactions
+- Connect transactions with student IDs
+- Display transaction timestamps
 
 ### Concepts Practiced
 
-- ArrayList
-- Encapsulation
-- CRUD operations
 - Object-oriented programming
+- ArrayList
 - Service layer
-- Menu-driven programming
-- Input handling with Scanner
+- Model classes
+- CRUD operations
+- Exception handling
+- LocalDateTime
+- Menu-driven application

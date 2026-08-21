@@ -4,12 +4,13 @@ public class Transaction {
 
     private int bookId;
     private String action;
-    private String dateTime;
+    private String time;
 
-    public Transaction(int bookId, String action, String dateTime) {
+    public Transaction(int bookId, String action, String time) {
+
         this.bookId = bookId;
         this.action = action;
-        this.dateTime = dateTime;
+        this.time = time;
     }
 
     public int getBookId() {
@@ -20,8 +21,8 @@ public class Transaction {
         return action;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public String getTime() {
+        return time;
     }
 
     public void displayTransaction() {
@@ -29,7 +30,7 @@ public class Transaction {
         System.out.println(
                 "Book ID: " + bookId +
                         " | Action: " + action +
-                        " | Time: " + dateTime
+                        " | Time: " + time
         );
     }
 }
