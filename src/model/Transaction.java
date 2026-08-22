@@ -6,7 +6,11 @@ public class Transaction {
     private String action;
     private String time;
 
-    public Transaction(int bookId, String action, String time) {
+    public Transaction(
+            int bookId,
+            String action,
+            String time
+    ) {
 
         this.bookId = bookId;
         this.action = action;

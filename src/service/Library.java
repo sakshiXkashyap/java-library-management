@@ -23,16 +23,25 @@ public class Library {
 
     public Library() {
 
+        // Load books from file
         books = FileManager.loadBooks();
 
         if (books == null) {
             books = new ArrayList<>();
         }
 
+        // Students are currently stored in memory
         students = new ArrayList<>();
-        transactions = new ArrayList<>();
+
+        // Load transactions from file
+        transactions = FileManager.loadTransactions();
+
+        if (transactions == null) {
+            transactions = new ArrayList<>();
+        }
 
         System.out.println("Books loaded successfully.");
+        System.out.println("Transactions loaded: " + transactions.size());
     }
 
 
@@ -51,6 +60,7 @@ public class Library {
     public boolean addNewBook(Book book) {
 
         if (searchBookById(book.getBookId()) != null) {
+
             return false;
         }
 
@@ -119,14 +129,18 @@ public class Library {
     // Show total books
     public void showTotalBooks() {
 
-        System.out.println("\nTotal Books: " + books.size());
+        System.out.println(
+                "\nTotal Books: " + books.size()
+        );
     }
 
 
     // Show available books
     public void showAvailableBooks() {
 
-        System.out.println("\n========== AVAILABLE BOOKS ==========");
+        System.out.println(
+                "\n========== AVAILABLE BOOKS =========="
+        );
 
         boolean availableBookFound = false;
 
@@ -142,7 +156,9 @@ public class Library {
 
         if (!availableBookFound) {
 
-            System.out.println("No books are currently available.");
+            System.out.println(
+                    "No books are currently available."
+            );
         }
     }
 
@@ -151,24 +167,10 @@ public class Library {
     // STUDENT METHODS
     // =====================================================
 
-    // Add default student
+    // Add student
     public void addStudent(Student student) {
 
         students.add(student);
-    }
-
-
-    // Add new student with duplicate ID checking
-    public boolean addNewStudent(Student student) {
-
-        if (searchStudentById(student.getStudentId()) != null) {
-
-            return false;
-        }
-
-        students.add(student);
-
-        return true;
     }
 
 
@@ -190,7 +192,9 @@ public class Library {
     // Display all students
     public void displayAllStudents() {
 
-        System.out.println("\n========== ALL STUDENTS ==========");
+        System.out.println(
+                "\n========== ALL STUDENTS =========="
+        );
 
         if (students.isEmpty()) {
 
@@ -203,6 +207,20 @@ public class Library {
 
             student.displayStudent();
         }
+    }
+
+
+    // Add new student with duplicate ID checking
+    public boolean addNewStudent(Student student) {
+
+        if (searchStudentById(student.getStudentId()) != null) {
+
+            return false;
+        }
+
+        students.add(student);
+
+        return true;
     }
 
 
@@ -228,27 +246,35 @@ public class Library {
     // ISSUE BOOK
     // =====================================================
 
-    public void issueBook(int bookId, int studentId)
-            throws BookNotFoundException, BookAlreadyIssuedException {
+    public void issueBook(
+            int bookId,
+            int studentId
+    )
+            throws BookNotFoundException,
+            BookAlreadyIssuedException {
 
+        // Search book
         Book book = searchBookById(bookId);
 
-        // Check book
         if (book == null) {
 
             throw new BookNotFoundException(
-                    "Book with ID " + bookId + " was not found."
+                    "Book with ID " + bookId +
+                            " was not found."
             );
         }
 
 
-        // Check student
-        Student student = searchStudentById(studentId);
+        // Search student
+        Student student =
+                searchStudentById(studentId);
 
         if (student == null) {
 
             System.out.println(
-                    "Student with ID " + studentId + " was not found."
+                    "Student with ID " +
+                            studentId +
+                            " was not found."
             );
 
             return;
@@ -259,7 +285,9 @@ public class Library {
         if (book.isIssued()) {
 
             throw new BookAlreadyIssuedException(
-                    "Book with ID " + bookId + " is already issued."
+                    "Book with ID " +
+                            bookId +
+                            " is already issued."
             );
         }
 
@@ -268,21 +296,30 @@ public class Library {
         book.setIssued(true);
 
 
-        // Add transaction
-        transactions.add(
+        // Create transaction
+        Transaction transaction =
                 new Transaction(
                         bookId,
                         "ISSUED TO STUDENT " + studentId,
                         LocalDateTime.now().toString()
-                )
-        );
+                );
+
+
+        // Add transaction to ArrayList
+        transactions.add(transaction);
 
 
         // Save books
         FileManager.saveBooks(books);
 
 
-        System.out.println("Book issued successfully.");
+        // Save transactions
+        FileManager.saveTransactions(transactions);
+
+
+        System.out.println(
+                "Book issued successfully."
+        );
 
         System.out.println(
                 "Issued to: " + student.getName()
@@ -306,6 +343,7 @@ public class Library {
         }
 
 
+        // Check whether book is issued
         if (!book.isIssued()) {
 
             System.out.println(
@@ -320,21 +358,30 @@ public class Library {
         book.setIssued(false);
 
 
-        // Add transaction
-        transactions.add(
+        // Create return transaction
+        Transaction transaction =
                 new Transaction(
                         bookId,
                         "RETURNED",
                         LocalDateTime.now().toString()
-                )
-        );
+                );
+
+
+        // Add transaction
+        transactions.add(transaction);
 
 
         // Save books
         FileManager.saveBooks(books);
 
 
-        System.out.println("Book returned successfully.");
+        // Save transactions
+        FileManager.saveTransactions(transactions);
+
+
+        System.out.println(
+                "Book returned successfully."
+        );
     }
 
 
@@ -348,7 +395,6 @@ public class Library {
                 "\n========== TRANSACTION HISTORY =========="
         );
 
-
         if (transactions.isEmpty()) {
 
             System.out.println(
@@ -358,17 +404,22 @@ public class Library {
             return;
         }
 
-
         for (Transaction transaction : transactions) {
 
             transaction.displayTransaction();
         }
     }
 
+
+    // =====================================================
+    // TOTAL TRANSACTIONS
+    // =====================================================
+
     public void showTotalTransactions() {
 
         System.out.println(
-                "\nTotal Transactions: " + transactions.size()
+                "\nTotal Transactions: " +
+                        transactions.size()
         );
     }
 }

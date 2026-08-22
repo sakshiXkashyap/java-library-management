@@ -1,23 +1,26 @@
-## Day 21 Progress
+## Day 22 Progress
 
-### Transaction Reporting
+### Transaction Persistence
 
-Added transaction reporting functionality:
+Implemented persistent transaction history.
 
-- Display transaction history
-- Show total number of transactions
-- Record book issue transactions
-- Record book return transactions
-- Connect transactions with student IDs
-- Display transaction timestamps
+### Features Added
+
+- Save transactions to `transactions.txt`
+- Load transactions when application starts
+- Persist issue transactions
+- Persist return transactions
+- Preserve transaction history after application restart
+- Display saved transaction history
+- Calculate total transactions from persisted data
 
 ### Concepts Practiced
 
-- Object-oriented programming
-- ArrayList
-- Service layer
-- Model classes
-- CRUD operations
+- File handling
+- FileReader
+- FileWriter
+- BufferedReader
 - Exception handling
-- LocalDateTime
-- Menu-driven application
+- ArrayList
+- Object serialization through text format
+- Data persistence
