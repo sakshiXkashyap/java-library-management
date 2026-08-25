@@ -23,26 +23,24 @@ public class Library {
 
     public Library() {
 
+        // Load books from file
         books = FileManager.loadBooks();
 
         if (books == null) {
-
             books = new ArrayList<>();
         }
 
+        // Students are currently stored in memory
         students = new ArrayList<>();
 
-        transactions =
-                FileManager.loadTransactions();
+        // Load transactions from file
+        transactions = FileManager.loadTransactions();
 
         if (transactions == null) {
-
             transactions = new ArrayList<>();
         }
 
-        System.out.println(
-                "Books loaded successfully."
-        );
+        System.out.println("Books loaded successfully.");
 
         System.out.println(
                 "Transactions loaded: " +
@@ -52,26 +50,21 @@ public class Library {
 
 
     // =====================================================
-    // ADD DEFAULT BOOK
+    // BOOK MANAGEMENT
     // =====================================================
 
+    // Add default book
     public void addBook(Book book) {
 
         books.add(book);
-
-        FileManager.saveBooks(books);
     }
 
 
-    // =====================================================
-    // ADD NEW BOOK
-    // =====================================================
-
+    // Add new book
     public boolean addNewBook(Book book) {
 
-        if (searchBookById(
-                book.getBookId()
-        ) != null) {
+        // Check duplicate ID
+        if (searchBookById(book.getBookId()) != null) {
 
             return false;
         }
@@ -84,10 +77,7 @@ public class Library {
     }
 
 
-    // =====================================================
-    // DISPLAY ALL BOOKS
-    // =====================================================
-
+    // Display all books
     public void displayAllBooks() {
 
         System.out.println(
@@ -110,10 +100,7 @@ public class Library {
     }
 
 
-    // =====================================================
-    // SEARCH BOOK
-    // =====================================================
-
+    // Search book by ID
     public Book searchBookById(int bookId) {
 
         for (Book book : books) {
@@ -128,14 +115,10 @@ public class Library {
     }
 
 
-    // =====================================================
-    // DELETE BOOK
-    // =====================================================
-
+    // Delete book
     public void deleteBook(int bookId) {
 
-        Book book =
-                searchBookById(bookId);
+        Book book = searchBookById(bookId);
 
         if (book == null) {
 
@@ -156,10 +139,7 @@ public class Library {
     }
 
 
-    // =====================================================
-    // SHOW TOTAL BOOKS
-    // =====================================================
-
+    // Show total books
     public void showTotalBooks() {
 
         System.out.println(
@@ -169,10 +149,7 @@ public class Library {
     }
 
 
-    // =====================================================
-    // SHOW AVAILABLE BOOKS
-    // =====================================================
-
+    // Show available books
     public void showAvailableBooks() {
 
         System.out.println(
@@ -201,33 +178,94 @@ public class Library {
 
 
     // =====================================================
-    // ADD STUDENT
+    // STUDENT MANAGEMENT
     // =====================================================
 
+    // Add default student
     public void addStudent(Student student) {
 
         students.add(student);
     }
 
 
-    // =====================================================
-    // SEARCH STUDENT
-    // =====================================================
+    // Add new student with duplicate ID checking
+    public boolean addNewStudent(Student student) {
 
-    public Student searchStudentById(
-            int studentId
-    ) {
+        if (searchStudentById(
+                student.getStudentId()
+        ) != null) {
+
+            return false;
+        }
+
+        students.add(student);
+
+        return true;
+    }
+
+
+    // Search student by ID
+    public Student searchStudentById(int studentId) {
 
         for (Student student : students) {
 
-            if (student.getStudentId() ==
-                    studentId) {
+            if (student.getStudentId() == studentId) {
 
                 return student;
             }
         }
 
         return null;
+    }
+
+
+    // Display all students
+    public void displayAllStudents() {
+
+        System.out.println(
+                "\n========== ALL STUDENTS =========="
+        );
+
+        if (students.isEmpty()) {
+
+            System.out.println(
+                    "No students registered."
+            );
+
+            return;
+        }
+
+        for (Student student : students) {
+
+            student.displayStudent();
+        }
+    }
+
+
+    // Delete student
+    public boolean deleteStudent(int studentId) {
+
+        Student student =
+                searchStudentById(studentId);
+
+        if (student == null) {
+
+            return false;
+        }
+
+        students.remove(student);
+
+        return true;
+    }
+
+
+    // Show total students
+    public void showTotalStudents() {
+
+        System.out.println(
+                "\nTotal Students: " +
+                        students.size()
+        );
     }
 
 
@@ -242,6 +280,7 @@ public class Library {
             throws BookNotFoundException,
             BookAlreadyIssuedException {
 
+        // Find book
         Book book =
                 searchBookById(bookId);
 
@@ -255,6 +294,7 @@ public class Library {
         }
 
 
+        // Find student
         Student student =
                 searchStudentById(studentId);
 
@@ -270,6 +310,7 @@ public class Library {
         }
 
 
+        // Check if already issued
         if (book.isIssued()) {
 
             throw new BookAlreadyIssuedException(
@@ -280,7 +321,7 @@ public class Library {
         }
 
 
-        // Mark book as issued
+        // Issue book
         book.setIssued(true);
 
 
@@ -294,15 +335,15 @@ public class Library {
                 );
 
 
-        // Add transaction
+        // Store transaction
         transactions.add(transaction);
 
 
-        // Save book
+        // Save books
         FileManager.saveBooks(books);
 
 
-        // Save transaction
+        // Save transactions
         FileManager.saveTransactions(
                 transactions
         );
@@ -338,6 +379,7 @@ public class Library {
         }
 
 
+        // Check whether book is issued
         if (!book.isIssued()) {
 
             System.out.println(
@@ -348,7 +390,7 @@ public class Library {
         }
 
 
-        // Mark book available
+        // Return book
         book.setIssued(false);
 
 
@@ -361,15 +403,15 @@ public class Library {
                 );
 
 
-        // Add transaction
+        // Store transaction
         transactions.add(transaction);
 
 
-        // Save book
+        // Save books
         FileManager.saveBooks(books);
 
 
-        // Save transaction
+        // Save transactions
         FileManager.saveTransactions(
                 transactions
         );
@@ -382,9 +424,10 @@ public class Library {
 
 
     // =====================================================
-    // TRANSACTION HISTORY
+    // TRANSACTION MANAGEMENT
     // =====================================================
 
+    // Display transaction history
     public void displayTransactionHistory() {
 
         System.out.println(
@@ -408,78 +451,12 @@ public class Library {
     }
 
 
-    // =====================================================
-    // TOTAL TRANSACTIONS
-    // =====================================================
-
+    // Show total transactions
     public void showTotalTransactions() {
 
         System.out.println(
                 "\nTotal Transactions: " +
                         transactions.size()
         );
-    }
-
-    // ==========================================
-// STUDENT MANAGEMENT
-// ==========================================
-
-    // Add new student with duplicate ID checking
-    public boolean addNewStudent(Student student) {
-
-        if (searchStudentById(student.getStudentId()) != null) {
-            return false;
-        }
-
-        students.add(student);
-
-        return true;
-    }
-
-
-    // Display all students
-    public void displayAllStudents() {
-
-        System.out.println("\n========== ALL STUDENTS ==========");
-
-        if (students.isEmpty()) {
-
-            System.out.println("No students available.");
-            return;
-        }
-
-        for (Student student : students) {
-
-            System.out.println(
-                    "Student ID : " + student.getStudentId()
-            );
-
-            System.out.println(
-                    "Name       : " + student.getName()
-            );
-
-            System.out.println(
-                    "Course     : " + student.getCourse()
-            );
-
-            System.out.println("----------------------------------");
-        }
-    }
-
-
-    // Delete student
-    public void deleteStudent(int studentId) {
-
-        Student student = searchStudentById(studentId);
-
-        if (student == null) {
-
-            System.out.println("Student not found.");
-            return;
-        }
-
-        students.remove(student);
-
-        System.out.println("Student deleted successfully.");
     }
 }

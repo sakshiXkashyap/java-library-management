@@ -398,10 +398,6 @@ public class Main {
                     break;
 
 
-                // =================================================
-                // 13. DELETE STUDENT
-                // =================================================
-
                 case 13:
 
                     System.out.print("Enter Student ID: ");
@@ -430,7 +426,19 @@ public class Main {
 
                     int deleteStudentId = scanner.nextInt();
 
-                    library.deleteStudent(deleteStudentId);
+
+                    if (library.deleteStudent(deleteStudentId)) {
+
+                        System.out.println(
+                                "Student deleted successfully."
+                        );
+
+                    } else {
+
+                        System.out.println(
+                                "Student not found."
+                        );
+                    }
 
                     break;
 
