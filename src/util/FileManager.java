@@ -1,6 +1,7 @@
 package util;
 
 import model.Book;
+import model.Student;
 import model.Transaction;
 
 import java.io.BufferedReader;
@@ -13,31 +14,16 @@ public class FileManager {
 
 
     // =====================================================
-    // BOOK FILE
+    // BOOK METHODS
     // =====================================================
 
-    private static final String BOOK_FILE =
-            "books.txt";
-
-
-    // =====================================================
-    // TRANSACTION FILE
-    // =====================================================
-
-    private static final String TRANSACTION_FILE =
-            "transactions.txt";
-
-
-    // =====================================================
-    // SAVE BOOKS
-    // =====================================================
-
+    // Save books to books.txt
     public static void saveBooks(ArrayList<Book> books) {
 
         try {
 
             FileWriter writer =
-                    new FileWriter(BOOK_FILE);
+                    new FileWriter("books.txt");
 
             for (Book book : books) {
 
@@ -64,10 +50,7 @@ public class FileManager {
     }
 
 
-    // =====================================================
-    // LOAD BOOKS
-    // =====================================================
-
+    // Load books from books.txt
     public static ArrayList<Book> loadBooks() {
 
         ArrayList<Book> books =
@@ -77,7 +60,7 @@ public class FileManager {
 
             BufferedReader reader =
                     new BufferedReader(
-                            new FileReader(BOOK_FILE)
+                            new FileReader("books.txt")
                     );
 
             String line;
@@ -85,25 +68,23 @@ public class FileManager {
             while ((line = reader.readLine()) != null) {
 
                 String[] data =
-                        line.split(",", 4);
+                        line.split(",");
 
                 if (data.length == 4) {
 
-                    int bookId =
+                    int id =
                             Integer.parseInt(data[0]);
 
-                    String title =
-                            data[1];
+                    String title = data[1];
 
-                    String author =
-                            data[2];
+                    String author = data[2];
 
                     boolean issued =
                             Boolean.parseBoolean(data[3]);
 
                     Book book =
                             new Book(
-                                    bookId,
+                                    id,
                                     title,
                                     author
                             );
@@ -118,7 +99,15 @@ public class FileManager {
 
         } catch (IOException e) {
 
-            // File doesn't exist yet.
+            System.out.println(
+                    "No book data found."
+            );
+
+        } catch (NumberFormatException e) {
+
+            System.out.println(
+                    "Invalid book data."
+            );
         }
 
         return books;
@@ -126,28 +115,123 @@ public class FileManager {
 
 
     // =====================================================
-    // SAVE TRANSACTIONS
+    // STUDENT METHODS
     // =====================================================
 
-    public static void saveTransactions(
-            ArrayList<Transaction> transactions
-    ) {
+    // Save students to students.txt
+    public static void saveStudents(
+            ArrayList<Student> students) {
 
         try {
 
             FileWriter writer =
-                    new FileWriter(TRANSACTION_FILE);
+                    new FileWriter("students.txt");
+
+            for (Student student : students) {
+
+                writer.write(
+                        student.getStudentId() + "," +
+                                student.getName() + "," +
+                                student.getCourse() + "\n"
+                );
+            }
+
+            writer.close();
+
+            System.out.println(
+                    "Students saved successfully."
+            );
+
+        } catch (IOException e) {
+
+            System.out.println(
+                    "Error while saving students."
+            );
+        }
+    }
+
+
+    // Load students from students.txt
+    public static ArrayList<Student> loadStudents() {
+
+        ArrayList<Student> students =
+                new ArrayList<>();
+
+        try {
+
+            BufferedReader reader =
+                    new BufferedReader(
+                            new FileReader("students.txt")
+                    );
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] data =
+                        line.split(",");
+
+                if (data.length == 3) {
+
+                    int id =
+                            Integer.parseInt(data[0]);
+
+                    String name = data[1];
+
+                    String course = data[2];
+
+                    Student student =
+                            new Student(
+                                    id,
+                                    name,
+                                    course
+                            );
+
+                    students.add(student);
+                }
+            }
+
+            reader.close();
+
+        } catch (IOException e) {
+
+            System.out.println(
+                    "No student data found."
+            );
+
+        } catch (NumberFormatException e) {
+
+            System.out.println(
+                    "Invalid student data."
+            );
+        }
+
+        return students;
+    }
+
+
+    // =====================================================
+    // TRANSACTION METHODS
+    // =====================================================
+
+    // Save transactions to transactions.txt
+    public static void saveTransactions(
+            ArrayList<Transaction> transactions) {
+
+        try {
+
+            FileWriter writer =
+                    new FileWriter(
+                            "transactions.txt"
+                    );
 
             for (Transaction transaction :
                     transactions) {
 
                 writer.write(
-                        transaction.getBookId() +
-                                "," +
-                                transaction.getAction() +
-                                "," +
-                                transaction.getTime() +
-                                "\n"
+                        transaction.getBookId() + "," +
+                                transaction.getAction() + "," +
+                                transaction.getTime() + "\n"
                 );
             }
 
@@ -166,10 +250,7 @@ public class FileManager {
     }
 
 
-    // =====================================================
-    // LOAD TRANSACTIONS
-    // =====================================================
-
+    // Load transactions from transactions.txt
     public static ArrayList<Transaction>
     loadTransactions() {
 
@@ -181,7 +262,7 @@ public class FileManager {
             BufferedReader reader =
                     new BufferedReader(
                             new FileReader(
-                                    TRANSACTION_FILE
+                                    "transactions.txt"
                             )
                     );
 
@@ -197,11 +278,9 @@ public class FileManager {
                     int bookId =
                             Integer.parseInt(data[0]);
 
-                    String action =
-                            data[1];
+                    String action = data[1];
 
-                    String time =
-                            data[2];
+                    String time = data[2];
 
                     Transaction transaction =
                             new Transaction(
@@ -218,7 +297,15 @@ public class FileManager {
 
         } catch (IOException e) {
 
-            // File doesn't exist yet.
+            System.out.println(
+                    "No transaction data found."
+            );
+
+        } catch (NumberFormatException e) {
+
+            System.out.println(
+                    "Invalid transaction data."
+            );
         }
 
         return transactions;

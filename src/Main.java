@@ -10,21 +10,29 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("\n======================================");
-        System.out.println("     LIBRARY MANAGEMENT SYSTEM");
-        System.out.println("======================================");
+        System.out.println(
+                "\n======================================"
+        );
+
+        System.out.println(
+                "     LIBRARY MANAGEMENT SYSTEM"
+        );
+
+        System.out.println(
+                "======================================"
+        );
 
 
-        // =====================================================
+        // =================================================
         // CREATE LIBRARY
-        // =====================================================
+        // =================================================
 
         Library library = new Library();
 
 
-        // =====================================================
+        // =================================================
         // DEFAULT BOOKS
-        // =====================================================
+        // =================================================
 
         if (library.searchBookById(101) == null) {
 
@@ -62,9 +70,9 @@ public class Main {
         }
 
 
-        // =====================================================
+        // =================================================
         // DEFAULT STUDENTS
-        // =====================================================
+        // =================================================
 
         if (library.searchStudentById(201) == null) {
 
@@ -102,55 +110,105 @@ public class Main {
         }
 
 
-        // =====================================================
+        // =================================================
         // SCANNER
-        // =====================================================
+        // =================================================
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner =
+                new Scanner(System.in);
 
         int choice;
 
 
-        // =====================================================
+        // =================================================
         // MAIN MENU
-        // =====================================================
+        // =================================================
 
         do {
 
-            System.out.println("\n========== LIBRARY MENU ==========");
+            System.out.println(
+                    "\n========== LIBRARY MENU =========="
+            );
 
-            System.out.println("1. View All Books");
-            System.out.println("2. Search Book");
-            System.out.println("3. Add New Book");
-            System.out.println("4. Issue Book");
-            System.out.println("5. Return Book");
-            System.out.println("6. Delete Book");
-            System.out.println("7. Show Available Books");
-            System.out.println("8. Show Total Books");
-            System.out.println("9. Transaction History");
-            System.out.println("10. Show Total Transactions");
-            System.out.println("11. View All Students");
-            System.out.println("12. Add New Student");
-            System.out.println("13. Search Student");
-            System.out.println("14. Delete Student");
-            System.out.println("15. Exit");
+            System.out.println(
+                    "1. View All Books"
+            );
+
+            System.out.println(
+                    "2. Search Book"
+            );
+
+            System.out.println(
+                    "3. Add New Book"
+            );
+
+            System.out.println(
+                    "4. Issue Book"
+            );
+
+            System.out.println(
+                    "5. Return Book"
+            );
+
+            System.out.println(
+                    "6. Delete Book"
+            );
+
+            System.out.println(
+                    "7. Show Available Books"
+            );
+
+            System.out.println(
+                    "8. Show Total Books"
+            );
+
+            System.out.println(
+                    "9. Transaction History"
+            );
+
+            System.out.println(
+                    "10. Show Total Transactions"
+            );
+
+            System.out.println(
+                    "11. View All Students"
+            );
+
+            System.out.println(
+                    "12. Add New Student"
+            );
+
+            System.out.println(
+                    "13. Search Student"
+            );
+
+            System.out.println(
+                    "14. Delete Student"
+            );
+
+            System.out.println(
+                    "15. Exit"
+            );
 
 
-            System.out.print("\nEnter your choice: ");
+            System.out.print(
+                    "\nEnter your choice: "
+            );
+
 
             choice = scanner.nextInt();
 
 
-            // =====================================================
+            // =================================================
             // MENU OPTIONS
-            // =====================================================
+            // =================================================
 
             switch (choice) {
 
 
-                // =================================================
+                // =============================================
                 // 1. VIEW ALL BOOKS
-                // =================================================
+                // =============================================
 
                 case 1:
 
@@ -159,23 +217,31 @@ public class Main {
                     break;
 
 
-                // =================================================
+                // =============================================
                 // 2. SEARCH BOOK
-                // =================================================
+                // =============================================
 
                 case 2:
 
-                    System.out.print("Enter Book ID: ");
+                    System.out.print(
+                            "Enter Book ID: "
+                    );
 
-                    int searchId = scanner.nextInt();
+                    int searchId =
+                            scanner.nextInt();
+
 
                     Book foundBook =
-                            library.searchBookById(searchId);
+                            library.searchBookById(
+                                    searchId
+                            );
 
 
                     if (foundBook != null) {
 
-                        System.out.println("\nBook Found:");
+                        System.out.println(
+                                "\nBook Found:"
+                        );
 
                         foundBook.displayBook();
 
@@ -189,32 +255,41 @@ public class Main {
                     break;
 
 
-                // =================================================
+                // =============================================
                 // 3. ADD NEW BOOK
-                // =================================================
+                // =============================================
 
                 case 3:
 
-                    System.out.print("Enter Book ID: ");
+                    System.out.print(
+                            "Enter Book ID: "
+                    );
 
-                    int id = scanner.nextInt();
+                    int bookId =
+                            scanner.nextInt();
 
                     scanner.nextLine();
 
 
-                    System.out.print("Enter Book Title: ");
+                    System.out.print(
+                            "Enter Book Title: "
+                    );
 
-                    String title = scanner.nextLine();
+                    String title =
+                            scanner.nextLine();
 
 
-                    System.out.print("Enter Author Name: ");
+                    System.out.print(
+                            "Enter Author Name: "
+                    );
 
-                    String author = scanner.nextLine();
+                    String author =
+                            scanner.nextLine();
 
 
                     Book newBook =
                             new Book(
-                                    id,
+                                    bookId,
                                     title,
                                     author
                             );
@@ -236,20 +311,26 @@ public class Main {
                     break;
 
 
-                // =================================================
+                // =============================================
                 // 4. ISSUE BOOK
-                // =================================================
+                // =============================================
 
                 case 4:
 
-                    System.out.print("Enter Book ID: ");
+                    System.out.print(
+                            "Enter Book ID: "
+                    );
 
-                    int issueId = scanner.nextInt();
+                    int issueId =
+                            scanner.nextInt();
 
 
-                    System.out.print("Enter Student ID: ");
+                    System.out.print(
+                            "Enter Student ID: "
+                    );
 
-                    int studentId = scanner.nextInt();
+                    int studentId =
+                            scanner.nextInt();
 
 
                     try {
@@ -259,55 +340,73 @@ public class Main {
                                 studentId
                         );
 
-                    } catch (BookNotFoundException e) {
+                    } catch (
+                            BookNotFoundException e
+                    ) {
 
                         System.out.println(
-                                "Error: " + e.getMessage()
+                                "Error: " +
+                                        e.getMessage()
                         );
 
-                    } catch (BookAlreadyIssuedException e) {
+                    } catch (
+                            BookAlreadyIssuedException e
+                    ) {
 
                         System.out.println(
-                                "Error: " + e.getMessage()
+                                "Error: " +
+                                        e.getMessage()
                         );
                     }
 
                     break;
 
 
-                // =================================================
+                // =============================================
                 // 5. RETURN BOOK
-                // =================================================
+                // =============================================
 
                 case 5:
 
-                    System.out.print("Enter Book ID: ");
+                    System.out.print(
+                            "Enter Book ID: "
+                    );
 
-                    int returnId = scanner.nextInt();
+                    int returnId =
+                            scanner.nextInt();
 
-                    library.returnBook(returnId);
+
+                    library.returnBook(
+                            returnId
+                    );
 
                     break;
 
 
-                // =================================================
+                // =============================================
                 // 6. DELETE BOOK
-                // =================================================
+                // =============================================
 
                 case 6:
 
-                    System.out.print("Enter Book ID: ");
+                    System.out.print(
+                            "Enter Book ID: "
+                    );
 
-                    int deleteId = scanner.nextInt();
+                    int deleteId =
+                            scanner.nextInt();
 
-                    library.deleteBook(deleteId);
+
+                    library.deleteBook(
+                            deleteId
+                    );
 
                     break;
 
 
-                // =================================================
-                // 7. SHOW AVAILABLE BOOKS
-                // =================================================
+                // =============================================
+                // 7. AVAILABLE BOOKS
+                // =============================================
 
                 case 7:
 
@@ -316,9 +415,9 @@ public class Main {
                     break;
 
 
-                // =================================================
-                // 8. SHOW TOTAL BOOKS
-                // =================================================
+                // =============================================
+                // 8. TOTAL BOOKS
+                // =============================================
 
                 case 8:
 
@@ -327,9 +426,9 @@ public class Main {
                     break;
 
 
-                // =================================================
+                // =============================================
                 // 9. TRANSACTION HISTORY
-                // =================================================
+                // =============================================
 
                 case 9:
 
@@ -338,9 +437,9 @@ public class Main {
                     break;
 
 
-                // =================================================
-                // 10. VIEW ALL STUDENTS
-                // =================================================
+                // =============================================
+                // 10. TOTAL TRANSACTIONS
+                // =============================================
 
                 case 10:
 
@@ -349,9 +448,9 @@ public class Main {
                     break;
 
 
-                // =================================================
-                // 11. ADD NEW STUDENT
-                // =================================================
+                // =============================================
+                // 11. VIEW ALL STUDENTS
+                // =============================================
 
                 case 11:
 
@@ -359,21 +458,38 @@ public class Main {
 
                     break;
 
+
+                // =============================================
+                // 12. ADD NEW STUDENT
+                // =============================================
+
                 case 12:
 
-                    System.out.print("Enter Student ID: ");
+                    System.out.print(
+                            "Enter Student ID: "
+                    );
 
-                    int newStudentId = scanner.nextInt();
+                    int newStudentId =
+                            scanner.nextInt();
 
                     scanner.nextLine();
 
-                    System.out.print("Enter Student Name: ");
 
-                    String studentName = scanner.nextLine();
+                    System.out.print(
+                            "Enter Student Name: "
+                    );
 
-                    System.out.print("Enter Course: ");
+                    String studentName =
+                            scanner.nextLine();
 
-                    String course = scanner.nextLine();
+
+                    System.out.print(
+                            "Enter Course: "
+                    );
+
+                    String course =
+                            scanner.nextLine();
+
 
                     Student newStudent =
                             new Student(
@@ -382,7 +498,12 @@ public class Main {
                                     course
                             );
 
-                    if (library.addNewStudent(newStudent)) {
+
+                    if (
+                            library.addNewStudent(
+                                    newStudent
+                            )
+                    ) {
 
                         System.out.println(
                                 "Student added successfully."
@@ -398,36 +519,63 @@ public class Main {
                     break;
 
 
+                // =============================================
+                // 13. SEARCH STUDENT
+                // =============================================
+
                 case 13:
 
-                    System.out.print("Enter Student ID: ");
+                    System.out.print(
+                            "Enter Student ID: "
+                    );
 
-                    int searchStudentId = scanner.nextInt();
+                    int searchStudentId =
+                            scanner.nextInt();
+
 
                     Student foundStudent =
-                            library.searchStudentById(searchStudentId);
+                            library.searchStudentById(
+                                    searchStudentId
+                            );
+
 
                     if (foundStudent != null) {
 
-                        System.out.println("\nStudent Found:");
+                        System.out.println(
+                                "\nStudent Found:"
+                        );
 
                         foundStudent.displayStudent();
 
                     } else {
 
-                        System.out.println("Student Not Found.");
+                        System.out.println(
+                                "Student Not Found."
+                        );
                     }
 
                     break;
 
+
+                // =============================================
+                // 14. DELETE STUDENT
+                // =============================================
+
                 case 14:
 
-                    System.out.print("Enter Student ID: ");
+                    System.out.print(
+                            "Enter Student ID: "
+                    );
 
-                    int deleteStudentId = scanner.nextInt();
+                    int deleteStudentId =
+                            scanner.nextInt();
 
 
-                    if (library.deleteStudent(deleteStudentId)) {
+                    if (
+                            library.deleteStudent(
+                                    deleteStudentId
+                            )
+                    ) {
 
                         System.out.println(
                                 "Student deleted successfully."
@@ -442,28 +590,39 @@ public class Main {
 
                     break;
 
+
+                // =============================================
+                // 15. EXIT
+                // =============================================
+
                 case 15:
 
                     System.out.println(
-                            "\nThank you for using Library Management System."
+                            "\nThank you for using " +
+                                    "Library Management System."
                     );
 
                     break;
 
 
+                // =============================================
+                // INVALID CHOICE
+                // =============================================
+
                 default:
 
                     System.out.println(
-                            "Invalid Choice. Please try again."
+                            "Invalid Choice. " +
+                                    "Please try again."
                     );
             }
 
         } while (choice != 15);
 
 
-        // =====================================================
+        // =================================================
         // CLOSE SCANNER
-        // =====================================================
+        // =================================================
 
         scanner.close();
     }
