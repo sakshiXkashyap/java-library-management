@@ -14,27 +14,36 @@ public class Student {
         this.course = course;
     }
 
-    // Get Student ID
+    // Getter for Student ID
     public int getStudentId() {
         return studentId;
     }
 
-    // Get Student Name
+    // Getter for Name
     public String getName() {
         return name;
     }
 
-    // Get Course
+    // Getter for Course
     public String getCourse() {
         return course;
     }
 
-    // Display Student
+    // Display student
     public void displayStudent() {
 
         System.out.println("----------------------------");
-        System.out.println("Student ID : " + studentId);
-        System.out.println("Name       : " + name);
-        System.out.println("Course     : " + course);
+
+        System.out.println(
+                "Student ID : " + studentId
+        );
+
+        System.out.println(
+                "Name       : " + name
+        );
+
+        System.out.println(
+                "Course     : " + course
+        );
     }
 }

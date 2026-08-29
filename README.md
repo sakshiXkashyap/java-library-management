@@ -1,102 +1,72 @@
-# 📚 Library Management System
-
-A console-based **Library Management System** built using Java.
-
-This project is being developed step-by-step to strengthen my understanding of **Core Java, OOP, Collections, Exception Handling, File Handling, and backend development concepts**.
-
----
-
 ## 🚀 Features
 
-### 📖 Book Management
-
+### 📚 Book Management
+- Add new books
 - View all books
-- Search book by ID
-- Add new book
+- Search books by ID
+- Delete books
+- Display available books
+- Display total number of books
+- Issue books
+- Return books
 - Prevent duplicate book IDs
-- Delete book
-- Show total number of books
-- Show available books
+- Prevent issuing an already issued book
 
 ### 👨‍🎓 Student Management
-
+- Add new students
 - View all students
-- Add new student
+- Search students by ID
+- Delete students
+- Display total students
 - Prevent duplicate student IDs
-- Search student by ID
-- Delete student
+- Store student information using file persistence
 
-### 🔄 Book Issue & Return
-
-- Issue a book to a student
-- Return an issued book
-- Prevent issuing an already issued book
-- Validate student before issuing
-- Prevent returning a book that is not issued
-
-### 📋 Transaction Management
-
+### 🔄 Transaction Management
 - Record book issue transactions
 - Record book return transactions
-- View transaction history
-- Show total number of transactions
-- Store transaction date and time
+- View complete transaction history
+- Display total number of transactions
+- Store transactions in a file
+- Load previous transactions when the application starts
 
-### 💾 File Handling
+### 💾 File Persistence
+The application uses text files to preserve data between program executions.
 
-- Load books from file when application starts
-- Save book changes to file
-- Save transactions to file
-- Load transactions when application starts
+Files used:
+
+- `books.txt` → Stores book information
+- `students.txt` → Stores student information
+- `transactions.txt` → Stores issue and return transaction history
+
+The application loads existing data when it starts and saves changes whenever books, students, or transactions are modified.
 
 ### ⚠️ Exception Handling
-
-Custom exceptions are used for library operations:
+Custom exceptions are used to handle common library errors:
 
 - `BookNotFoundException`
 - `BookAlreadyIssuedException`
 
----
-
-## 🛠️ Technologies Used
-
-- Java
-- Object-Oriented Programming
-- ArrayList
-- Exception Handling
-- Custom Exceptions
-- File Handling
-- LocalDateTime
-- IntelliJ IDEA
-- Git
-- GitHub
+These exceptions provide meaningful error messages instead of allowing the application to crash.
 
 ---
 
-## 📂 Project Structure
+## 🖥️ Application Menu
 
 ```text
-java-library-management/
-│
-├── src/
-│   │
-│   ├── model/
-│   │   ├── Book.java
-│   │   ├── Student.java
-│   │   └── Transaction.java
-│   │
-│   ├── service/
-│   │   └── Library.java
-│   │
-│   ├── exception/
-│   │   ├── BookAlreadyIssuedException.java
-│   │   └── BookNotFoundException.java
-│   │
-│   ├── util/
-│   │   └── FileManager.java
-│   │
-│   └── Main.java
-│
-├── books.txt
-├── transactions.txt
-└── README.md
+========== LIBRARY MENU ==========
+
+1. View All Books
+2. Search Book
+3. Add New Book
+4. Issue Book
+5. Return Book
+6. Delete Book
+7. Show Available Books
+8. Show Total Books
+9. Transaction History
+10. Show Total Transactions
+11. View All Students
+12. Add New Student
+13. Search Student
+14. Delete Student
+15. Exit
