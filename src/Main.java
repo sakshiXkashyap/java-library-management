@@ -10,32 +10,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println(
-                "\n======================================"
-        );
-
-        System.out.println(
-                "     LIBRARY MANAGEMENT SYSTEM"
-        );
-
-        System.out.println(
-                "======================================"
-        );
-
-
-        // =================================================
-        // CREATE LIBRARY
-        // =================================================
+        System.out.println("\n======================================");
+        System.out.println("     LIBRARY MANAGEMENT SYSTEM");
+        System.out.println("======================================");
 
         Library library = new Library();
 
-
-        // =================================================
+        // ==========================================
         // DEFAULT BOOKS
-        // =================================================
+        // ==========================================
 
         if (library.searchBookById(101) == null) {
-
             library.addBook(
                     new Book(
                             101,
@@ -45,9 +30,7 @@ public class Main {
             );
         }
 
-
         if (library.searchBookById(102) == null) {
-
             library.addBook(
                     new Book(
                             102,
@@ -57,9 +40,7 @@ public class Main {
             );
         }
 
-
         if (library.searchBookById(103) == null) {
-
             library.addBook(
                     new Book(
                             103,
@@ -69,13 +50,11 @@ public class Main {
             );
         }
 
-
-        // =================================================
+        // ==========================================
         // DEFAULT STUDENTS
-        // =================================================
+        // ==========================================
 
         if (library.searchStudentById(201) == null) {
-
             library.addStudent(
                     new Student(
                             201,
@@ -85,9 +64,7 @@ public class Main {
             );
         }
 
-
         if (library.searchStudentById(202) == null) {
-
             library.addStudent(
                     new Student(
                             202,
@@ -97,9 +74,7 @@ public class Main {
             );
         }
 
-
         if (library.searchStudentById(203) == null) {
-
             library.addStudent(
                     new Student(
                             203,
@@ -109,106 +84,44 @@ public class Main {
             );
         }
 
-
-        // =================================================
-        // SCANNER
-        // =================================================
-
-        Scanner scanner =
-                new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         int choice;
 
-
-        // =================================================
+        // ==========================================
         // MAIN MENU
-        // =================================================
+        // ==========================================
 
         do {
 
-            System.out.println(
-                    "\n========== LIBRARY MENU =========="
-            );
+            System.out.println("\n========== LIBRARY MENU ==========");
 
-            System.out.println(
-                    "1. View All Books"
-            );
+            System.out.println("1. View All Books");
+            System.out.println("2. Search Book");
+            System.out.println("3. Add New Book");
+            System.out.println("4. Issue Book");
+            System.out.println("5. Return Book");
+            System.out.println("6. Delete Book");
+            System.out.println("7. Show Available Books");
+            System.out.println("8. Show Total Books");
+            System.out.println("9. Transaction History");
+            System.out.println("10. Show Total Transactions");
+            System.out.println("11. View All Students");
+            System.out.println("12. Add New Student");
+            System.out.println("13. Search Student");
+            System.out.println("14. Delete Student");
+            System.out.println("15. Exit");
 
-            System.out.println(
-                    "2. Search Book"
-            );
-
-            System.out.println(
-                    "3. Add New Book"
-            );
-
-            System.out.println(
-                    "4. Issue Book"
-            );
-
-            System.out.println(
-                    "5. Return Book"
-            );
-
-            System.out.println(
-                    "6. Delete Book"
-            );
-
-            System.out.println(
-                    "7. Show Available Books"
-            );
-
-            System.out.println(
-                    "8. Show Total Books"
-            );
-
-            System.out.println(
-                    "9. Transaction History"
-            );
-
-            System.out.println(
-                    "10. Show Total Transactions"
-            );
-
-            System.out.println(
-                    "11. View All Students"
-            );
-
-            System.out.println(
-                    "12. Add New Student"
-            );
-
-            System.out.println(
-                    "13. Search Student"
-            );
-
-            System.out.println(
-                    "14. Delete Student"
-            );
-
-            System.out.println(
-                    "15. Exit"
-            );
-
-
-            System.out.print(
+            choice = readInteger(
+                    scanner,
                     "\nEnter your choice: "
             );
 
-
-            choice = scanner.nextInt();
-
-
-            // =================================================
-            // MENU OPTIONS
-            // =================================================
-
             switch (choice) {
 
-
-                // =============================================
+                // ==================================
                 // 1. VIEW ALL BOOKS
-                // =============================================
+                // ==================================
 
                 case 1:
 
@@ -216,32 +129,23 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 2. SEARCH BOOK
-                // =============================================
+                // ==================================
 
                 case 2:
 
-                    System.out.print(
+                    int searchId = readInteger(
+                            scanner,
                             "Enter Book ID: "
                     );
 
-                    int searchId =
-                            scanner.nextInt();
-
-
                     Book foundBook =
-                            library.searchBookById(
-                                    searchId
-                            );
-
+                            library.searchBookById(searchId);
 
                     if (foundBook != null) {
 
-                        System.out.println(
-                                "\nBook Found:"
-                        );
+                        System.out.println("\nBook Found:");
 
                         foundBook.displayBook();
 
@@ -254,22 +158,16 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 3. ADD NEW BOOK
-                // =============================================
+                // ==================================
 
                 case 3:
 
-                    System.out.print(
+                    int id = readInteger(
+                            scanner,
                             "Enter Book ID: "
                     );
-
-                    int bookId =
-                            scanner.nextInt();
-
-                    scanner.nextLine();
-
 
                     System.out.print(
                             "Enter Book Title: "
@@ -278,7 +176,6 @@ public class Main {
                     String title =
                             scanner.nextLine();
 
-
                     System.out.print(
                             "Enter Author Name: "
                     );
@@ -286,14 +183,12 @@ public class Main {
                     String author =
                             scanner.nextLine();
 
-
                     Book newBook =
                             new Book(
-                                    bookId,
+                                    id,
                                     title,
                                     author
                             );
-
 
                     if (library.addNewBook(newBook)) {
 
@@ -310,28 +205,21 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 4. ISSUE BOOK
-                // =============================================
+                // ==================================
 
                 case 4:
 
-                    System.out.print(
+                    int issueId = readInteger(
+                            scanner,
                             "Enter Book ID: "
                     );
 
-                    int issueId =
-                            scanner.nextInt();
-
-
-                    System.out.print(
+                    int studentId = readInteger(
+                            scanner,
                             "Enter Student ID: "
                     );
-
-                    int studentId =
-                            scanner.nextInt();
-
 
                     try {
 
@@ -340,9 +228,7 @@ public class Main {
                                 studentId
                         );
 
-                    } catch (
-                            BookNotFoundException e
-                    ) {
+                    } catch (BookNotFoundException e) {
 
                         System.out.println(
                                 "Error: " +
@@ -361,52 +247,39 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 5. RETURN BOOK
-                // =============================================
+                // ==================================
 
                 case 5:
 
-                    System.out.print(
+                    int returnId = readInteger(
+                            scanner,
                             "Enter Book ID: "
                     );
 
-                    int returnId =
-                            scanner.nextInt();
-
-
-                    library.returnBook(
-                            returnId
-                    );
+                    library.returnBook(returnId);
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 6. DELETE BOOK
-                // =============================================
+                // ==================================
 
                 case 6:
 
-                    System.out.print(
+                    int deleteId = readInteger(
+                            scanner,
                             "Enter Book ID: "
                     );
 
-                    int deleteId =
-                            scanner.nextInt();
-
-
-                    library.deleteBook(
-                            deleteId
-                    );
+                    library.deleteBook(deleteId);
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 7. AVAILABLE BOOKS
-                // =============================================
+                // ==================================
 
                 case 7:
 
@@ -414,10 +287,9 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 8. TOTAL BOOKS
-                // =============================================
+                // ==================================
 
                 case 8:
 
@@ -425,10 +297,9 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 9. TRANSACTION HISTORY
-                // =============================================
+                // ==================================
 
                 case 9:
 
@@ -436,10 +307,9 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 10. TOTAL TRANSACTIONS
-                // =============================================
+                // ==================================
 
                 case 10:
 
@@ -447,10 +317,9 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 11. VIEW ALL STUDENTS
-                // =============================================
+                // ==================================
 
                 case 11:
 
@@ -458,22 +327,16 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 12. ADD NEW STUDENT
-                // =============================================
+                // ==================================
 
                 case 12:
 
-                    System.out.print(
+                    int newStudentId = readInteger(
+                            scanner,
                             "Enter Student ID: "
                     );
-
-                    int newStudentId =
-                            scanner.nextInt();
-
-                    scanner.nextLine();
-
 
                     System.out.print(
                             "Enter Student Name: "
@@ -482,7 +345,6 @@ public class Main {
                     String studentName =
                             scanner.nextLine();
 
-
                     System.out.print(
                             "Enter Course: "
                     );
@@ -490,14 +352,12 @@ public class Main {
                     String course =
                             scanner.nextLine();
 
-
                     Student newStudent =
                             new Student(
                                     newStudentId,
                                     studentName,
                                     course
                             );
-
 
                     if (
                             library.addNewStudent(
@@ -518,26 +378,22 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 13. SEARCH STUDENT
-                // =============================================
+                // ==================================
 
                 case 13:
 
-                    System.out.print(
-                            "Enter Student ID: "
-                    );
-
                     int searchStudentId =
-                            scanner.nextInt();
-
+                            readInteger(
+                                    scanner,
+                                    "Enter Student ID: "
+                            );
 
                     Student foundStudent =
                             library.searchStudentById(
                                     searchStudentId
                             );
-
 
                     if (foundStudent != null) {
 
@@ -556,20 +412,17 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 14. DELETE STUDENT
-                // =============================================
+                // ==================================
 
                 case 14:
 
-                    System.out.print(
-                            "Enter Student ID: "
-                    );
-
                     int deleteStudentId =
-                            scanner.nextInt();
-
+                            readInteger(
+                                    scanner,
+                                    "Enter Student ID: "
+                            );
 
                     if (
                             library.deleteStudent(
@@ -584,16 +437,15 @@ public class Main {
                     } else {
 
                         System.out.println(
-                                "Student not found."
+                                "Student Not Found."
                         );
                     }
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // 15. EXIT
-                // =============================================
+                // ==================================
 
                 case 15:
 
@@ -604,10 +456,9 @@ public class Main {
 
                     break;
 
-
-                // =============================================
+                // ==================================
                 // INVALID CHOICE
-                // =============================================
+                // ==================================
 
                 default:
 
@@ -619,11 +470,37 @@ public class Main {
 
         } while (choice != 15);
 
-
-        // =================================================
-        // CLOSE SCANNER
-        // =================================================
-
         scanner.close();
+    }
+
+
+    // ==============================================
+    // SAFE INTEGER INPUT
+    // ==============================================
+
+    private static int readInteger(
+            Scanner scanner,
+            String message
+    ) {
+
+        while (true) {
+
+            System.out.print(message);
+
+            String input =
+                    scanner.nextLine().trim();
+
+            try {
+
+                return Integer.parseInt(input);
+
+            } catch (NumberFormatException e) {
+
+                System.out.println(
+                        "Invalid input. " +
+                                "Please enter a number."
+                );
+            }
+        }
     }
 }
