@@ -1,4 +1,4 @@
-201|Sakshi|MCA
-202|Rahul|BCA
-203|Priya|B.Tech
-204|Amit|MCA
+201,Sakshi,MCA
+202,Rahul,BCA
+203,Priya,B.Tech
+204,Amit,MCA

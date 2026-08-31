@@ -23,7 +23,7 @@ public class Library {
 
     public Library() {
 
-        // Load books
+        // Load books from file
         books = FileManager.loadBooks();
 
         if (books == null) {
@@ -31,7 +31,7 @@ public class Library {
         }
 
 
-        // Load students
+        // Load students from file
         students = FileManager.loadStudents();
 
         if (students == null) {
@@ -39,7 +39,7 @@ public class Library {
         }
 
 
-        // Load transactions
+        // Load transactions from file
         transactions = FileManager.loadTransactions();
 
         if (transactions == null) {
@@ -48,6 +48,11 @@ public class Library {
 
 
         System.out.println("Books loaded successfully.");
+
+        System.out.println(
+                "Students loaded: " +
+                        students.size()
+        );
 
         System.out.println(
                 "Transactions loaded: " +
@@ -70,7 +75,7 @@ public class Library {
     // Add new book
     public boolean addNewBook(Book book) {
 
-        // Check duplicate Book ID
+        // Check duplicate book ID
         if (searchBookById(book.getBookId()) != null) {
 
             return false;
@@ -107,7 +112,7 @@ public class Library {
     }
 
 
-    // Search book
+    // Search book by ID
     public Book searchBookById(int bookId) {
 
         for (Book book : books) {
@@ -188,7 +193,6 @@ public class Library {
             }
         }
 
-
         if (!availableBookFound) {
 
             System.out.println(
@@ -202,27 +206,22 @@ public class Library {
     // STUDENT MANAGEMENT
     // =====================================================
 
-    // Add student
+    // Add default student
     public void addStudent(Student student) {
 
-        if (searchStudentById(
-                student.getStudentId()
-        ) == null) {
-
-            students.add(student);
-
-            FileManager.saveStudents(students);
-        }
+        students.add(student);
     }
 
 
     // Add new student
     public boolean addNewStudent(Student student) {
 
-        // Check duplicate Student ID
-        if (searchStudentById(
-                student.getStudentId()
-        ) != null) {
+        // Check duplicate student ID
+        if (
+                searchStudentById(
+                        student.getStudentId()
+                ) != null
+        ) {
 
             return false;
         }
@@ -230,18 +229,22 @@ public class Library {
 
         students.add(student);
 
+        // Save students to file
         FileManager.saveStudents(students);
 
         return true;
     }
 
 
-    // Search student
+    // Search student by ID
     public Student searchStudentById(int studentId) {
 
         for (Student student : students) {
 
-            if (student.getStudentId() == studentId) {
+            if (
+                    student.getStudentId()
+                            == studentId
+            ) {
 
                 return student;
             }
@@ -258,7 +261,6 @@ public class Library {
                 "\n========== ALL STUDENTS =========="
         );
 
-
         if (students.isEmpty()) {
 
             System.out.println(
@@ -271,16 +273,8 @@ public class Library {
 
         for (Student student : students) {
 
-            System.out.println(
-                    "----------------------------"
-            );
-
             student.displayStudent();
         }
-
-        System.out.println(
-                "----------------------------"
-        );
     }
 
 
@@ -290,7 +284,6 @@ public class Library {
         Student student =
                 searchStudentById(studentId);
 
-
         if (student == null) {
 
             return false;
@@ -299,6 +292,7 @@ public class Library {
 
         students.remove(student);
 
+        // Save updated students
         FileManager.saveStudents(students);
 
         return true;
@@ -415,7 +409,6 @@ public class Library {
 
     public void returnBook(int bookId) {
 
-        // Find book
         Book book =
                 searchBookById(bookId);
 
@@ -492,15 +485,6 @@ public class Library {
                     "No transactions available."
             );
 
-            return;
-        }
-
-
-        for (Transaction transaction :
-                transactions) {
-
-            transaction.displayTransaction();
-        }
     }
 
 

@@ -9,39 +9,32 @@ import java.util.ArrayList;
 
 public class FileManager {
 
-    private static final String BOOK_FILE = "books.txt";
-    private static final String TRANSACTION_FILE = "transactions.txt";
-    private static final String STUDENT_FILE = "students.txt";
-
-
     // =====================================================
-    // SAVE BOOKS
+    // BOOK METHODS
     // =====================================================
 
     public static void saveBooks(ArrayList<Book> books) {
 
         try {
 
-            BufferedWriter writer =
-                    new BufferedWriter(
-                            new FileWriter(BOOK_FILE)
-                    );
+            FileWriter writer =
+                    new FileWriter("books.txt");
 
             for (Book book : books) {
 
                 writer.write(
-                        book.getBookId() + "|" +
-                                book.getTitle() + "|" +
-                                book.getAuthor() + "|" +
-                                book.isIssued()
+                        book.getBookId() + "," +
+                                book.getTitle() + "," +
+                                book.getAuthor() + "," +
+                                book.isIssued() + "\n"
                 );
-
-                writer.newLine();
             }
 
             writer.close();
 
-            System.out.println("Books saved successfully.");
+            System.out.println(
+                    "Books saved successfully."
+            );
 
         } catch (IOException e) {
 
@@ -52,16 +45,12 @@ public class FileManager {
     }
 
 
-    // =====================================================
-    // LOAD BOOKS
-    // =====================================================
-
     public static ArrayList<Book> loadBooks() {
 
         ArrayList<Book> books =
                 new ArrayList<>();
 
-        File file = new File(BOOK_FILE);
+        File file = new File("books.txt");
 
         if (!file.exists()) {
 
@@ -79,12 +68,8 @@ public class FileManager {
 
             while ((line = reader.readLine()) != null) {
 
-                if (line.trim().isEmpty()) {
-                    continue;
-                }
-
                 String[] data =
-                        line.split("\\|");
+                        line.split(",");
 
                 if (data.length >= 4) {
 
@@ -113,7 +98,8 @@ public class FileManager {
 
             reader.close();
 
-        } catch (Exception e) {
+        } catch (IOException |
+                 NumberFormatException e) {
 
             System.out.println(
                     "Error while loading books."
@@ -125,7 +111,107 @@ public class FileManager {
 
 
     // =====================================================
-    // SAVE TRANSACTIONS
+    // STUDENT METHODS
+    // =====================================================
+
+    public static void saveStudents(
+            ArrayList<Student> students
+    ) {
+
+        try {
+
+            FileWriter writer =
+                    new FileWriter("students.txt");
+
+            for (Student student : students) {
+
+                writer.write(
+                        student.getStudentId() + "," +
+                                student.getName() + "," +
+                                student.getCourse() + "\n"
+                );
+            }
+
+            writer.close();
+
+            System.out.println(
+                    "Students saved successfully."
+            );
+
+        } catch (IOException e) {
+
+            System.out.println(
+                    "Error while saving students."
+            );
+        }
+    }
+
+
+    public static ArrayList<Student> loadStudents() {
+
+        ArrayList<Student> students =
+                new ArrayList<>();
+
+        File file =
+                new File("students.txt");
+
+        if (!file.exists()) {
+
+            return students;
+        }
+
+        try {
+
+            BufferedReader reader =
+                    new BufferedReader(
+                            new FileReader(file)
+                    );
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] data =
+                        line.split(",");
+
+                if (data.length >= 3) {
+
+                    int studentId =
+                            Integer.parseInt(data[0]);
+
+                    String name =
+                            data[1];
+
+                    String course =
+                            data[2];
+
+                    Student student =
+                            new Student(
+                                    studentId,
+                                    name,
+                                    course
+                            );
+
+                    students.add(student);
+                }
+            }
+
+            reader.close();
+
+        } catch (IOException |
+                 NumberFormatException e) {
+
+            System.out.println(
+                    "Error while loading students."
+            );
+        }
+
+        return students;
+    }
+
+
+    // =====================================================
+    // TRANSACTION METHODS
     // =====================================================
 
     public static void saveTransactions(
@@ -134,26 +220,26 @@ public class FileManager {
 
         try {
 
-            BufferedWriter writer =
-                    new BufferedWriter(
-                            new FileWriter(
-                                    TRANSACTION_FILE
-                            )
+            FileWriter writer =
+                    new FileWriter(
+                            "transactions.txt"
                     );
 
             for (Transaction transaction :
                     transactions) {
 
                 writer.write(
-                        transaction.getBookId() + "|" +
-                                transaction.getAction() + "|" +
-                                transaction.getTime()
+                        transaction.getBookId() + "," +
+                                transaction.getAction() + "," +
+                                transaction.getTime() + "\n"
                 );
-
-                writer.newLine();
             }
 
             writer.close();
+
+            System.out.println(
+                    "Transactions saved successfully."
+            );
 
         } catch (IOException e) {
 
@@ -164,10 +250,6 @@ public class FileManager {
     }
 
 
-    // =====================================================
-    // LOAD TRANSACTIONS
-    // =====================================================
-
     public static ArrayList<Transaction>
     loadTransactions() {
 
@@ -175,7 +257,7 @@ public class FileManager {
                 new ArrayList<>();
 
         File file =
-                new File(TRANSACTION_FILE);
+                new File("transactions.txt");
 
         if (!file.exists()) {
 
@@ -197,21 +279,19 @@ public class FileManager {
 
             while ((line = reader.readLine()) != null) {
 
-                if (line.trim().isEmpty()) {
-                    continue;
-                }
-
                 String[] data =
-                        line.split("\\|");
+                        line.split(",", 3);
 
                 if (data.length >= 3) {
 
                     int bookId =
                             Integer.parseInt(data[0]);
 
-                    String action = data[1];
+                    String action =
+                            data[1];
 
-                    String time = data[2];
+                    String time =
+                            data[2];
 
                     Transaction transaction =
                             new Transaction(
@@ -220,13 +300,16 @@ public class FileManager {
                                     time
                             );
 
-                    transactions.add(transaction);
+                    transactions.add(
+                            transaction
+                    );
                 }
             }
 
             reader.close();
 
-        } catch (Exception e) {
+        } catch (IOException |
+                 NumberFormatException e) {
 
             System.out.println(
                     "Error while loading transactions."
@@ -234,118 +317,5 @@ public class FileManager {
         }
 
         return transactions;
-    }
-
-
-    // =====================================================
-    // SAVE STUDENTS
-    // =====================================================
-
-    public static void saveStudents(
-            ArrayList<Student> students
-    ) {
-
-        try {
-
-            BufferedWriter writer =
-                    new BufferedWriter(
-                            new FileWriter(
-                                    STUDENT_FILE
-                            )
-                    );
-
-            for (Student student :
-                    students) {
-
-                writer.write(
-                        student.getStudentId() + "|" +
-                                student.getName() + "|" +
-                                student.getCourse()
-                );
-
-                writer.newLine();
-            }
-
-            writer.close();
-
-            System.out.println(
-                    "Students saved successfully."
-            );
-
-        } catch (IOException e) {
-
-            System.out.println(
-                    "Error while saving students."
-            );
-        }
-    }
-
-
-    // =====================================================
-    // LOAD STUDENTS
-    // =====================================================
-
-    public static ArrayList<Student>
-    loadStudents() {
-
-        ArrayList<Student> students =
-                new ArrayList<>();
-
-        File file =
-                new File(STUDENT_FILE);
-
-        if (!file.exists()) {
-
-            return students;
-        }
-
-        try {
-
-            BufferedReader reader =
-                    new BufferedReader(
-                            new FileReader(file)
-                    );
-
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-
-                if (line.trim().isEmpty()) {
-                    continue;
-                }
-
-                String[] data =
-                        line.split("\\|");
-
-                if (data.length >= 3) {
-
-                    int studentId =
-                            Integer.parseInt(data[0]);
-
-                    String name = data[1];
-
-                    String course = data[2];
-
-                    Student student =
-                            new Student(
-                                    studentId,
-                                    name,
-                                    course
-                            );
-
-                    students.add(student);
-                }
-            }
-
-            reader.close();
-
-        } catch (Exception e) {
-
-            System.out.println(
-                    "Error while loading students."
-            );
-        }
-
-        return students;
     }
 }
