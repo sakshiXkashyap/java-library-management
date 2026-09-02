@@ -281,23 +281,47 @@ public class Library {
     // Delete student
     public boolean deleteStudent(int studentId) {
 
-        Student student =
-                searchStudentById(studentId);
+        Student student = searchStudentById(studentId);
 
         if (student == null) {
-
             return false;
         }
 
+        // Check whether this student currently has an issued book
+        for (Transaction transaction : transactions) {
+
+            if (transaction.getAction().equals("ISSUED TO STUDENT " + studentId)) {
+
+                // Check if the book was returned later
+                boolean returned = false;
+
+                for (Transaction returnTransaction : transactions) {
+
+                    if (returnTransaction.getBookId() == transaction.getBookId()
+                            && returnTransaction.getAction().equals("RETURNED")
+                            && transactions.indexOf(returnTransaction)
+                            > transactions.indexOf(transaction)) {
+
+                        returned = true;
+                        break;
+                    }
+                }
+
+                if (!returned) {
+                    System.out.println(
+                            "Cannot delete student. Student currently has an issued book."
+                    );
+                    return false;
+                }
+            }
+        }
 
         students.remove(student);
 
-        // Save updated students
         FileManager.saveStudents(students);
 
         return true;
     }
-
 
     // Show total students
     public void showTotalStudents() {
@@ -484,7 +508,7 @@ public class Library {
             System.out.println(
                     "No transactions available."
             );
-
+        }
     }
 
 
