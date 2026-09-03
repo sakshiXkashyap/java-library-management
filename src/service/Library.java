@@ -287,14 +287,14 @@ public class Library {
             return false;
         }
 
-        // Check whether this student currently has an issued book
+        // Check if the student currently has an issued book
         for (Transaction transaction : transactions) {
 
             if (transaction.getAction().equals("ISSUED TO STUDENT " + studentId)) {
 
-                // Check if the book was returned later
                 boolean returned = false;
 
+                // Check whether that book was returned later
                 for (Transaction returnTransaction : transactions) {
 
                     if (returnTransaction.getBookId() == transaction.getBookId()
@@ -311,6 +311,7 @@ public class Library {
                     System.out.println(
                             "Cannot delete student. Student currently has an issued book."
                     );
+
                     return false;
                 }
             }
@@ -491,23 +492,18 @@ public class Library {
     }
 
 
-    // =====================================================
-    // TRANSACTION MANAGEMENT
-    // =====================================================
-
     // Display transaction history
     public void displayTransactionHistory() {
 
-        System.out.println(
-                "\n========== TRANSACTION HISTORY =========="
-        );
-
+        System.out.println("\n========== TRANSACTION HISTORY ==========");
 
         if (transactions.isEmpty()) {
+            System.out.println("No transactions available.");
+            return;
+        }
 
-            System.out.println(
-                    "No transactions available."
-            );
+        for (Transaction transaction : transactions) {
+            transaction.displayTransaction();
         }
     }
 
@@ -516,8 +512,7 @@ public class Library {
     public void showTotalTransactions() {
 
         System.out.println(
-                "\nTotal Transactions: " +
-                        transactions.size()
+                "\nTotal Transactions: " + transactions.size()
         );
     }
 }
