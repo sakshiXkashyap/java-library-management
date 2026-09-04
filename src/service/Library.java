@@ -61,14 +61,22 @@ public class Library {
     }
 
 
-    // =====================================================
-    // BOOK MANAGEMENT
-    // =====================================================
-
-    // Add default book
     public void addBook(Book book) {
 
+        if (book == null) {
+            System.out.println("Cannot add an empty book.");
+            return;
+        }
+
+        if (searchBookById(book.getBookId()) != null) {
+            System.out.println("Book ID already exists.");
+            return;
+        }
+
         books.add(book);
+        FileManager.saveBooks(books);
+
+        System.out.println("Book added successfully.");
     }
 
 
@@ -202,14 +210,22 @@ public class Library {
     }
 
 
-    // =====================================================
-    // STUDENT MANAGEMENT
-    // =====================================================
-
-    // Add default student
     public void addStudent(Student student) {
 
+        if (student == null) {
+            System.out.println("Cannot add an empty student.");
+            return;
+        }
+
+        if (searchStudentById(student.getStudentId()) != null) {
+            System.out.println("Student ID already exists.");
+            return;
+        }
+
         students.add(student);
+        FileManager.saveStudents(students);
+
+        System.out.println("Student added successfully.");
     }
 
 
